@@ -1,0 +1,16 @@
+{
+  "name": "The Costello Law Group",
+  "short_name": "Costello Law",
+  "description": "Personal Injury Attorney in Broward County, Florida",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0066B2",
+  "icons": [
+    {
+      "src": "/favicon.jpg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
