@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
 import { ArrowRight, ArrowLeft, CheckCircle2, Phone, Mail, User, Scale } from "lucide-react"
+import { submitConsultationForm } from "@/app/actions/consultation"
 
 const caseTypes = [
   "Car Accident",
@@ -41,12 +42,32 @@ export function MultiStepForm() {
     if (step > 1) setStep(step - 1)
   }
 
-  const handleSubmit = async () => {
-    console.log("[v0] Form submitted:", formData)
-    console.log("[v0] Email will be sent to: rdub@fullstackwoo.day")
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-    // TODO: Implement actual email sending to rdub@fullstackwoo.day
-    alert("Thank you! We'll contact you shortly.")
+  const handleSubmit = async () => {
+    setIsSubmitting(true)
+    try {
+      const result = await submitConsultationForm(formData)
+      if (result.success) {
+        alert("Thank you! We'll contact you within 24 hours.")
+        // Reset form
+        setFormData({
+          email: "",
+          phone: "",
+          firstName: "",
+          lastName: "",
+          caseType: "",
+        })
+        setStep(1)
+      } else {
+        alert("There was an error submitting your request. Please try again or call us directly.")
+      }
+    } catch (error) {
+      console.error("Error submitting consultation form:", error)
+      alert("There was an error submitting your request. Please try again or call us directly.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const isStepValid = () => {
@@ -253,12 +274,12 @@ export function MultiStepForm() {
           ) : (
             <Button
               onClick={handleSubmit}
-              disabled={!isStepValid()}
+              disabled={!isStepValid() || isSubmitting}
               className="flex-1 h-9 bg-[#00A878] hover:bg-[#00A878]/90 text-sm"
               size="sm"
             >
               <CheckCircle2 className="h-3 w-3 mr-1" />
-              Submit
+              {isSubmitting ? "Submitting..." : "Submit"}
             </Button>
           )}
         </div>
