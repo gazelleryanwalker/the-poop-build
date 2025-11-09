@@ -76,7 +76,7 @@ export default function BlogEditor({ postId, onBack }: { postId?: string; onBack
     }
 
     try {
-      if (postId) {
+      if (postId && postId !== 'new') {
         const { error } = await supabase
           .from('blog_posts')
           .update(postData)
