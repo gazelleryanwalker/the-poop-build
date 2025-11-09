@@ -1,12 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import dynamic from 'next/dynamic'
 import { supabase } from '@/lib/supabase'
-import { Save, Eye, Upload, X } from 'lucide-react'
-
-// Dynamically import ReactQuill to avoid SSR issues
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
+import { Save, Eye, Upload, X, ArrowLeft } from 'lucide-react'
 
 interface BlogPost {
   id?: string
@@ -15,17 +11,19 @@ interface BlogPost {
   excerpt: string
   content: string
   featured_image?: string
-  author: string
-  category: string
-  tags: string[]
-  seo_title: string
-  seo_description: string
-  seo_keywords: string[]
-  published: boolean
+  author?: string
+  category?: string
+  tags?: string[]
+  seo_title?: string
+  seo_description?: string
+  seo_keywords?: string[]
+  published?: boolean
   published_at?: string
+  created_at?: string
+  updated_at?: string
 }
 
-export default function BlogEditor({ postId }: { postId?: string }) {
+export default function BlogEditor({ postId, onBack }: { postId?: string; onBack: () => void }) {
   const [post, setPost] = useState<BlogPost>({
     slug: '',
     title: '',
@@ -45,19 +43,12 @@ export default function BlogEditor({ postId }: { postId?: string }) {
   const [message, setMessage] = useState('')
   const [tagInput, setTagInput] = useState('')
   const [keywordInput, setKeywordInput] = useState('')
-  const [mounted, setMounted] = useState(false)
-
-  // Using the singleton supabase client
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  useEffect(() => {
-    if (postId && mounted) {
+    if (postId) {
       loadPost()
     }
-  }, [postId, mounted])
+  }, [postId])
 
   async function loadPost() {
     setLoading(true)
@@ -86,22 +77,20 @@ export default function BlogEditor({ postId }: { postId?: string }) {
 
     try {
       if (postId) {
-        // Update existing post
         const { error } = await supabase
           .from('blog_posts')
           .update(postData)
           .eq('id', postId)
-
+        
         if (error) throw error
         setMessage('Post updated successfully!')
       } else {
-        // Create new post
         const { error } = await supabase
           .from('blog_posts')
-          .insert([postData])
-
+          .insert([{ ...postData, created_at: new Date().toISOString() }])
+        
         if (error) throw error
-        setMessage('Post created successfully!')
+        setMessage(publish ? 'Post published successfully!' : 'Draft saved successfully!')
       }
     } catch (error: any) {
       setMessage(`Error: ${error.message}`)
@@ -110,51 +99,59 @@ export default function BlogEditor({ postId }: { postId?: string }) {
     setSaving(false)
   }
 
+  function generateSlug(title: string) {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+  }
+
+  function handleTitleChange(title: string) {
+    setPost({ ...post, title, slug: generateSlug(title) })
+  }
+
   function addTag() {
-    if (tagInput && !post.tags.includes(tagInput)) {
-      setPost({ ...post, tags: [...post.tags, tagInput] })
+    if (tagInput && !post.tags?.includes(tagInput)) {
+      setPost({ ...post, tags: [...(post.tags || []), tagInput] })
       setTagInput('')
     }
   }
 
   function removeTag(tag: string) {
-    setPost({ ...post, tags: post.tags.filter(t => t !== tag) })
+    setPost({ ...post, tags: post.tags?.filter(t => t !== tag) })
   }
 
   function addKeyword() {
-    if (keywordInput && !post.seo_keywords.includes(keywordInput)) {
-      setPost({ ...post, seo_keywords: [...post.seo_keywords, keywordInput] })
+    if (keywordInput && !post.seo_keywords?.includes(keywordInput)) {
+      setPost({ ...post, seo_keywords: [...(post.seo_keywords || []), keywordInput] })
       setKeywordInput('')
     }
   }
 
   function removeKeyword(keyword: string) {
-    setPost({ ...post, seo_keywords: post.seo_keywords.filter(k => k !== keyword) })
-  }
-
-  // Auto-generate slug from title
-  function generateSlug(title: string) {
-    return title
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/(^-|-$)/g, '')
+    setPost({ ...post, seo_keywords: post.seo_keywords?.filter(k => k !== keyword) })
   }
 
   if (loading) {
     return <div className="p-8 text-center">Loading...</div>
   }
 
-  if (!mounted) {
-    return <div className="p-6 text-center">Loading editor...</div>
-  }
-
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-gray-900">
-          {postId ? 'Edit Blog Post' : 'New Blog Post'}
-        </h2>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={onBack}
+            className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Posts
+          </button>
+          <h2 className="text-2xl font-bold text-gray-900">
+            {postId ? 'Edit Blog Post' : 'New Blog Post'}
+          </h2>
+        </div>
         <div className="flex gap-2">
           <button
             onClick={() => handleSave(false)}
@@ -182,24 +179,22 @@ export default function BlogEditor({ postId }: { postId?: string }) {
       )}
 
       {/* Basic Info */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
-        <h3 className="text-lg font-semibold text-gray-900">Basic Information</h3>
+      <div className="bg-white rounded-lg shadow p-6 space-y-4">
+        <h3 className="text-lg font-semibold">Basic Information</h3>
         
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Title</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
           <input
             type="text"
             value={post.title}
-            onChange={(e) => {
-              setPost({ ...post, title: e.target.value, slug: generateSlug(e.target.value) })
-            }}
+            onChange={(e) => handleTitleChange(e.target.value)}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A878] focus:border-transparent"
             placeholder="Enter post title..."
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Slug (URL)</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Slug (URL)</label>
           <input
             type="text"
             value={post.slug}
@@ -210,32 +205,45 @@ export default function BlogEditor({ postId }: { postId?: string }) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Excerpt</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Excerpt</label>
           <textarea
             value={post.excerpt}
             onChange={(e) => setPost({ ...post, excerpt: e.target.value })}
             rows={3}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A878] focus:border-transparent"
-            placeholder="Brief summary of the post..."
+            placeholder="Brief description..."
           />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Content</label>
+          <textarea
+            value={post.content}
+            onChange={(e) => setPost({ ...post, content: e.target.value })}
+            rows={15}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A878] focus:border-transparent font-mono text-sm"
+            placeholder="Write your blog post content here... (Markdown supported)"
+          />
+          <p className="text-sm text-gray-500 mt-1">You can use Markdown formatting</p>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Author</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Author</label>
             <input
               type="text"
-              value={post.author}
+              value={post.author || ''}
               onChange={(e) => setPost({ ...post, author: e.target.value })}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A878] focus:border-transparent"
               placeholder="Author name"
             />
           </div>
+
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
             <input
               type="text"
-              value={post.category}
+              value={post.category || ''}
               onChange={(e) => setPost({ ...post, category: e.target.value })}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A878] focus:border-transparent"
               placeholder="Category"
@@ -244,7 +252,18 @@ export default function BlogEditor({ postId }: { postId?: string }) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Tags</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Featured Image URL</label>
+          <input
+            type="text"
+            value={post.featured_image || ''}
+            onChange={(e) => setPost({ ...post, featured_image: e.target.value })}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A878] focus:border-transparent"
+            placeholder="https://example.com/image.jpg"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Tags</label>
           <div className="flex gap-2 mb-2">
             <input
               type="text"
@@ -262,7 +281,7 @@ export default function BlogEditor({ postId }: { postId?: string }) {
             </button>
           </div>
           <div className="flex flex-wrap gap-2">
-            {post.tags.map((tag) => (
+            {post.tags?.map((tag) => (
               <span
                 key={tag}
                 className="inline-flex items-center gap-1 px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
@@ -275,77 +294,36 @@ export default function BlogEditor({ postId }: { postId?: string }) {
             ))}
           </div>
         </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Featured Image URL</label>
-          <input
-            type="text"
-            value={post.featured_image}
-            onChange={(e) => setPost({ ...post, featured_image: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A878] focus:border-transparent"
-            placeholder="https://example.com/image.jpg"
-          />
-          {post.featured_image && (
-            <img src={post.featured_image} alt="Preview" className="mt-2 max-h-48 rounded-lg" />
-          )}
-        </div>
       </div>
 
-      {/* Content Editor */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
-        <h3 className="text-lg font-semibold text-gray-900">Content</h3>
-        <div className="prose-editor">
-          <ReactQuill
-            theme="snow"
-            value={post.content}
-            onChange={(content) => setPost({ ...post, content })}
-            modules={{
-              toolbar: [
-                [{ header: [1, 2, 3, false] }],
-                ['bold', 'italic', 'underline', 'strike'],
-                [{ list: 'ordered' }, { list: 'bullet' }],
-                [{ align: [] }],
-                ['link', 'image'],
-                ['clean'],
-              ],
-            }}
-            className="min-h-[400px]"
-          />
-        </div>
-      </div>
-
-      {/* SEO Settings */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
-        <h3 className="text-lg font-semibold text-gray-900">SEO Settings</h3>
+      {/* SEO */}
+      <div className="bg-white rounded-lg shadow p-6 space-y-4">
+        <h3 className="text-lg font-semibold">SEO Settings</h3>
         
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">SEO Title</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">SEO Title</label>
           <input
             type="text"
-            value={post.seo_title}
+            value={post.seo_title || ''}
             onChange={(e) => setPost({ ...post, seo_title: e.target.value })}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A878] focus:border-transparent"
-            placeholder="SEO optimized title (60 chars max)"
-            maxLength={60}
+            placeholder="SEO title (defaults to post title)"
           />
-          <p className="text-xs text-gray-500 mt-1">{post.seo_title.length}/60 characters</p>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">SEO Description</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">SEO Description</label>
           <textarea
-            value={post.seo_description}
+            value={post.seo_description || ''}
             onChange={(e) => setPost({ ...post, seo_description: e.target.value })}
             rows={3}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A878] focus:border-transparent"
-            placeholder="SEO meta description (160 chars max)"
-            maxLength={160}
+            placeholder="Meta description for search engines..."
           />
-          <p className="text-xs text-gray-500 mt-1">{post.seo_description.length}/160 characters</p>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">SEO Keywords</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">SEO Keywords</label>
           <div className="flex gap-2 mb-2">
             <input
               type="text"
@@ -363,10 +341,10 @@ export default function BlogEditor({ postId }: { postId?: string }) {
             </button>
           </div>
           <div className="flex flex-wrap gap-2">
-            {post.seo_keywords.map((keyword) => (
+            {post.seo_keywords?.map((keyword) => (
               <span
                 key={keyword}
-                className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm"
+                className="inline-flex items-center gap-1 px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
               >
                 {keyword}
                 <button onClick={() => removeKeyword(keyword)} className="hover:text-red-600">
