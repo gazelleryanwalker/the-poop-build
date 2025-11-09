@@ -45,14 +45,19 @@ export default function BlogEditor({ postId }: { postId?: string }) {
   const [message, setMessage] = useState('')
   const [tagInput, setTagInput] = useState('')
   const [keywordInput, setKeywordInput] = useState('')
+  const [mounted, setMounted] = useState(false)
 
   // Using the singleton supabase client
 
   useEffect(() => {
-    if (postId) {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (postId && mounted) {
       loadPost()
     }
-  }, [postId])
+  }, [postId, mounted])
 
   async function loadPost() {
     setLoading(true)
@@ -137,6 +142,10 @@ export default function BlogEditor({ postId }: { postId?: string }) {
 
   if (loading) {
     return <div className="p-8 text-center">Loading...</div>
+  }
+
+  if (!mounted) {
+    return <div className="p-6 text-center">Loading editor...</div>
   }
 
   return (
