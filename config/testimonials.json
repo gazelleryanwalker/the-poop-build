@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "name": "Client Name 1",
+    "location": "Cooper City, FL",
+    "rating": 5,
+    "text": "Replace this with actual client testimonial. Josh Costello provided excellent legal representation...",
+    "caseType": "Personal Injury",
+    "date": "2024-01-15"
+  },
+  {
+    "id": 2,
+    "name": "Client Name 2",
+    "location": "Davie, FL",
+    "rating": 5,
+    "text": "Replace this with actual client testimonial. The Costello Law Group fought hard for my case...",
+    "caseType": "Car Accident",
+    "date": "2024-02-20"
+  },
+  {
+    "id": 3,
+    "name": "Client Name 3",
+    "location": "Plantation, FL",
+    "rating": 5,
+    "text": "Replace this with actual client testimonial. I highly recommend Joshua Costello for any legal needs...",
+    "caseType": "Insurance Claims",
+    "date": "2024-03-10"
+  }
+]

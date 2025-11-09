@@ -1,0 +1,47 @@
+{
+  "companyName": "The Costello Law Group",
+  "tagline": "Expert Legal Representation",
+  "description": "Joshua Costello, Esq. - 12+ years fighting for personal injury victims and insurance claim denials in Broward County, Florida.",
+  "contact": {
+    "phone": "(954) 591-8099",
+    "phoneRaw": "+19545918099",
+    "email": "joshua@thecostellolawgroup.com",
+    "formEmails": [
+      "rdub@fullstackwoo.day",
+      "joshua@thecostellolawgroup.com"
+    ],
+    "address": {
+      "street": "5846 S Flamingo Rd. Ste. 520",
+      "city": "Cooper City",
+      "state": "FL",
+      "zip": "33330",
+      "country": "US"
+    },
+    "geo": {
+      "latitude": 26.0581,
+      "longitude": -80.2683
+    }
+  },
+  "social": {
+    "facebook": "https://www.facebook.com/costellolawgroup",
+    "linkedin": "https://www.linkedin.com/company/costello-law-group",
+    "twitter": "https://twitter.com/costellolawgrp",
+    "instagram": ""
+  },
+  "stats": {
+    "yearsExperience": "12+",
+    "casesWon": "100+",
+    "clientSatisfaction": "98%",
+    "availability": "24/7"
+  },
+  "googleMyBusiness": {
+    "placeId": "REPLACE_WITH_ACTUAL_PLACE_ID",
+    "enabled": false
+  },
+  "seo": {
+    "title": "The Costello Law Group | Personal Injury Attorney Broward County FL",
+    "description": "Joshua Costello, Esq. - 12+ years fighting for personal injury victims and insurance claim denials in Broward County, Florida. Free consultation. No win, no fee.",
+    "keywords": "personal injury attorney, car accident lawyer, Broward County attorney, Cooper City lawyer, Davie attorney, Plantation lawyer, Pembroke Pines attorney, insurance claims, criminal defense, wrongful death, slip and fall, premises liability",
+    "url": "https://thecostellolawgroup.com"
+  }
+}
