@@ -1,0 +1,173 @@
+{
+  "heroSection": {
+    "locationBadge": "Serving Broward County, Florida",
+    "mainHeading": "Expert Legal",
+    "accentHeading": "Representation",
+    "subheading": "The Costello Law Group delivers personalized legal solutions with proven results.",
+    "description": "Specializing in personal injury, insurance claims, and criminal defense across Cooper City, Davie, Plantation, and Pembroke Pines.",
+    "primaryCTA": {
+      "text": "Get Free Consultation",
+      "link": "#contact-form"
+    },
+    "secondaryCTA": {
+      "text": "Call Now",
+      "link": "tel:+19545918099"
+    }
+  },
+  "expertiseBadges": [
+    { "text": "Auto Accidents", "icon": "Car" },
+    { "text": "Personal Injury", "icon": "Scale" },
+    { "text": "Insurance Claims", "icon": "Shield" },
+    { "text": "Premises Liability", "icon": "HomeIcon" },
+    { "text": "Wrongful Death", "icon": "Scale" },
+    { "text": "PIP Claims", "icon": "FileText" },
+    { "text": "Criminal Defense", "icon": "Gavel" },
+    { "text": "Homeowners Insurance", "icon": "HomeIcon" }
+  ],
+  "statsSection": {
+    "stats": [
+      { "number": "12+", "label": "Years of Legal Excellence", "icon": "Award" },
+      { "number": "100+", "label": "Successful Case Outcomes", "icon": "CheckCircle2" },
+      { "number": "98%", "label": "Client Satisfaction Rate", "icon": "Star" }
+    ],
+    "badges": [
+      { "text": "24/7 Available", "icon": "Clock" },
+      { "text": "No Win, No Fee", "icon": "CheckCircle2" }
+    ]
+  },
+  "googleReviews": {
+    "enabled": true,
+    "rating": 5,
+    "reviewCount": 50
+  },
+  "contactFormSection": {
+    "heading": "Get Your Free Case Evaluation",
+    "subheading": "Answer a few quick questions and we'll get back to you within 24 hours"
+  },
+  "practiceAreasSection": {
+    "sectionLabel": "Our Expertise",
+    "heading": "Our Practice Areas",
+    "description": "Personal injury and insurance claims representation in Broward County, Florida. We fight for maximum compensation for our clients.",
+    "practiceAreas": [
+      {
+        "title": "Car Accidents",
+        "description": "Aggressive representation for car accident victims. We fight to get you the compensation you deserve.",
+        "icon": "Car",
+        "slug": "car-accidents",
+        "color": "text-blue-600",
+        "bgColor": "bg-blue-50",
+        "hoverBg": "hover:bg-blue-100"
+      },
+      {
+        "title": "Truck Accidents",
+        "description": "Specialized expertise in complex commercial truck accident cases with proven results.",
+        "icon": "Truck",
+        "slug": "truck-accidents",
+        "color": "text-orange-600",
+        "bgColor": "bg-orange-50",
+        "hoverBg": "hover:bg-orange-100"
+      },
+      {
+        "title": "Motorcycle Accidents",
+        "description": "Dedicated advocacy for motorcyclists injured due to negligence on Florida roads.",
+        "icon": "Bike",
+        "slug": "motorcycle-accidents",
+        "color": "text-red-600",
+        "bgColor": "bg-red-50",
+        "hoverBg": "hover:bg-red-100"
+      },
+      {
+        "title": "Slip & Fall",
+        "description": "Holding property owners accountable for dangerous conditions that cause injuries.",
+        "icon": "Scale",
+        "slug": "slip-and-fall",
+        "color": "text-purple-600",
+        "bgColor": "bg-purple-50",
+        "hoverBg": "hover:bg-purple-100"
+      },
+      {
+        "title": "Premises Liability",
+        "description": "Protecting your rights when injured on someone else's property.",
+        "icon": "HomeIcon",
+        "slug": "premises-liability",
+        "color": "text-[#00A878]",
+        "bgColor": "bg-[#00A878]/10",
+        "hoverBg": "hover:bg-[#00A878]/20"
+      },
+      {
+        "title": "Dog Bites",
+        "description": "Compassionate representation for victims of dog attacks and animal injuries.",
+        "icon": "Dog",
+        "slug": "dog-bites",
+        "color": "text-amber-600",
+        "bgColor": "bg-amber-50",
+        "hoverBg": "hover:bg-amber-100"
+      },
+      {
+        "title": "Wrongful Death",
+        "description": "Seeking justice for families who have lost loved ones due to negligence.",
+        "icon": "Scale",
+        "slug": "wrongful-death",
+        "color": "text-gray-700",
+        "bgColor": "bg-gray-100",
+        "hoverBg": "hover:bg-gray-200"
+      },
+      {
+        "title": "PIP Claims",
+        "description": "Expert handling of Personal Injury Protection insurance disputes.",
+        "icon": "FileText",
+        "slug": "pip-claims",
+        "color": "text-cyan-600",
+        "bgColor": "bg-cyan-50",
+        "hoverBg": "hover:bg-cyan-100"
+      },
+      {
+        "title": "Criminal Defense",
+        "description": "Vigorous defense of your rights and freedom in criminal proceedings.",
+        "icon": "Gavel",
+        "slug": "criminal-defense",
+        "color": "text-[#0066B2]",
+        "bgColor": "bg-[#0066B2]/10",
+        "hoverBg": "hover:bg-[#0066B2]/20"
+      },
+      {
+        "title": "Homeowners Insurance",
+        "description": "Fighting denied or underpaid homeowners insurance claims.",
+        "icon": "HomeIcon",
+        "slug": "homeowners-insurance",
+        "color": "text-indigo-600",
+        "bgColor": "bg-indigo-50",
+        "hoverBg": "hover:bg-indigo-100"
+      }
+    ]
+  },
+  "testimonialsSection": {
+    "sectionLabel": "Testimonials",
+    "heading": "What Our Clients Say",
+    "subheading": "Real results from real people",
+    "testimonials": [
+      {
+        "quote": "I was extremely impressed with the way Josh and The Costello Law Group handled my personal injury case. Josh's expertise and dedication made a significant difference in achieving a successful and prompt outcome. I am truly grateful for their support and highly recommend their services to anyone dealing with a personal injury matter.",
+        "clientName": "Sally W.",
+        "caseType": "Personal Injury Client",
+        "rating": 5
+      },
+      {
+        "quote": "The Costello Law Group fought tirelessly for my case. Their expertise and dedication resulted in a settlement that exceeded my expectations. I couldn't be happier with the outcome.",
+        "clientName": "Michael R.",
+        "caseType": "Car Accident Client",
+        "rating": 5
+      },
+      {
+        "quote": "Josh and his team provided exceptional service throughout my entire case. They kept me informed every step of the way and achieved an outstanding result. Highly recommended!",
+        "clientName": "Jennifer M.",
+        "caseType": "Insurance Claim Client",
+        "rating": 5
+      }
+    ]
+  },
+  "ctaSection": {
+    "heading": "Ready to Get Started?",
+    "description": "Schedule your free consultation today. Let's discuss how we can help you achieve the best possible outcome for your case."
+  }
+}

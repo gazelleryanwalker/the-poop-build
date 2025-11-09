@@ -1,0 +1,19 @@
+{
+  "siteName": "The Costello Law Group",
+  "contactInfo": {
+    "phone": "+1 (954) 591-8099",
+    "email": "joshua@thecostellolawgroup.com",
+    "address": "5846 S Flamingo Rd. Ste. 520\nCooper City, FL 33330"
+  },
+  "socialMedia": {
+    "facebook": "https://www.facebook.com/costellolawgroup",
+    "twitter": "https://twitter.com/costellolawgrp",
+    "linkedin": "https://www.linkedin.com/company/costello-law-group",
+    "instagram": ""
+  },
+  "colors": {
+    "primary": "#0066B2",
+    "secondary": "#00A878",
+    "accent": "#D4AF37"
+  }
+}
