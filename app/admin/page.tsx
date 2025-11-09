@@ -8,6 +8,9 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Settings, FileText, Newspaper, MessageSquare, Briefcase, Trophy, LogOut, Mail, Lock } from "lucide-react"
+import BlogList from "@/components/blog-list"
+import BlogEditor from "@/components/blog-editor"
+import SettingsEditor from "@/components/settings-editor"
 
 export default function AdminDashboard() {
   const [user, setUser] = useState<any>(null)
@@ -16,6 +19,7 @@ export default function AdminDashboard() {
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const [isLoggingIn, setIsLoggingIn] = useState(false)
+  const [editingPostId, setEditingPostId] = useState<string | null>(null)
 
   useEffect(() => {
     // Check if user is logged in
@@ -52,6 +56,14 @@ export default function AdminDashboard() {
 
   const handleLogout = async () => {
     await supabase.auth.signOut()
+  }
+
+  const handleEditPost = (id: string) => {
+    setEditingPostId(id === 'new' ? null : id)
+  }
+
+  const handleBackToList = () => {
+    setEditingPostId(null)
   }
 
   if (loading) {
@@ -151,7 +163,7 @@ export default function AdminDashboard() {
               <FileText className="w-4 h-4 mr-2" />
               Pages
             </TabsTrigger>
-            <TabsTrigger value="blog">
+            <TabsTrigger value="blog" onClick={() => setEditingPostId(null)}>
               <Newspaper className="w-4 h-4 mr-2" />
               Blog
             </TabsTrigger>
@@ -170,15 +182,7 @@ export default function AdminDashboard() {
           </TabsList>
 
           <TabsContent value="settings">
-            <Card>
-              <CardHeader>
-                <CardTitle>Site Settings</CardTitle>
-                <CardDescription>Manage theme colors, social media, and company information</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-gray-600">Settings editor coming soon...</p>
-              </CardContent>
-            </Card>
+            <SettingsEditor />
           </TabsContent>
 
           <TabsContent value="pages">
@@ -194,15 +198,16 @@ export default function AdminDashboard() {
           </TabsContent>
 
           <TabsContent value="blog">
-            <Card>
-              <CardHeader>
-                <CardTitle>Blog Posts</CardTitle>
-                <CardDescription>Create and manage blog articles</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-gray-600">Blog editor coming soon...</p>
-              </CardContent>
-            </Card>
+            {editingPostId !== null ? (
+              <div>
+                <Button onClick={handleBackToList} variant="outline" className="mb-4">
+                  ← Back to Posts
+                </Button>
+                <BlogEditor postId={editingPostId} />
+              </div>
+            ) : (
+              <BlogList onEdit={handleEditPost} />
+            )}
           </TabsContent>
 
           <TabsContent value="testimonials">

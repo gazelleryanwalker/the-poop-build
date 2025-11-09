@@ -165,3 +165,31 @@ html, body {
 * {
   box-sizing: border-box;
 }
+
+/* Quill Editor Styles */
+.prose-editor .ql-container {
+  min-height: 400px;
+  font-size: 16px;
+  font-family: inherit;
+}
+
+.prose-editor .ql-editor {
+  min-height: 400px;
+  padding: 20px;
+}
+
+.prose-editor .ql-toolbar {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  background: #f9fafb;
+}
+
+.prose-editor .ql-container {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.prose-editor .ql-editor.ql-blank::before {
+  color: #9ca3af;
+  font-style: normal;
+}
