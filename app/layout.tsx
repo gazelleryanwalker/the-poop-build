@@ -20,6 +20,12 @@ const playfairDisplay = Playfair_Display({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://thecostellolawgroup.com'),
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+  },
   title: "The Costello Law Group | Personal Injury Attorney Broward County FL",
   description:
     "Joshua Costello, Esq. - 12+ years fighting for personal injury victims and insurance claim denials in Broward County, Florida. Free consultation. No win, no fee.",
