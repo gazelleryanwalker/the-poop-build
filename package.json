@@ -6,7 +6,8 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "vercel-build": "tinacms build --local --skip-indexing --skip-cloud-checks && next build"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
@@ -68,6 +69,7 @@
     "styled-components": "latest",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
+    "tinacms": "^2.9.1",
     "vaul": "^0.9.9",
     "zod": "3.25.67"
   },

@@ -97,7 +97,7 @@ This inquiry was submitted through the contact form at thecostellolawgroup.com
 
     await resend.emails.send({
       from: "The Costello Law Group <noreply@thecostellolawgroup.com>",
-      to: "rdub@fullstackwoo.day",
+      to: ["rdub@fullstackwoo.day", "joshuacostello2013@gmail.com"],
       replyTo: formData.email,
       subject: `New Contact Form: ${formData.firstName} ${formData.lastName} - ${formData.practiceArea}`,
       text: emailContent,

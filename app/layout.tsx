@@ -95,11 +95,7 @@ export default function RootLayout({
               opens: "09:00",
               closes: "17:00",
             },
-            sameAs: [
-              "https://www.facebook.com/costellolawgroup",
-              "https://www.linkedin.com/company/costello-law-group",
-              "https://twitter.com/costellolawgrp",
-            ],
+            // sameAs: [], // Social media links to be added via CMS
             priceRange: "$$",
             areaServed: [
               {
