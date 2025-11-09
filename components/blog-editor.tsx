@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
-import { createClient } from '@/lib/supabase/client'
+import { supabase } from '@/lib/supabase'
 import { Save, Eye, Upload, X } from 'lucide-react'
 import 'react-quill/dist/quill.snow.css'
 
@@ -47,7 +47,7 @@ export default function BlogEditor({ postId }: { postId?: string }) {
   const [tagInput, setTagInput] = useState('')
   const [keywordInput, setKeywordInput] = useState('')
 
-  const supabase = createClient()
+  // Using the singleton supabase client
 
   useEffect(() => {
     if (postId) {

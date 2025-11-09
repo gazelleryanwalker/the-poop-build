@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { createClient } from '@/lib/supabase/client'
+import { supabase } from '@/lib/supabase'
 import { Save, Facebook, Twitter, Instagram, Linkedin, Youtube, Mail, Phone, MapPin } from 'lucide-react'
 
 interface SiteSettings {
@@ -42,7 +42,7 @@ export default function SettingsEditor() {
   const [saving, setSaving] = useState(false)
   const [message, setMessage] = useState('')
 
-  const supabase = createClient()
+  // Using the singleton supabase client
 
   useEffect(() => {
     loadSettings()

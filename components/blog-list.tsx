@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { createClient } from '@/lib/supabase/client'
+import { supabase } from '@/lib/supabase'
 import { Plus, Edit, Trash2, Eye, EyeOff } from 'lucide-react'
 
 interface BlogPost {
@@ -19,7 +19,7 @@ interface BlogPost {
 export default function BlogList({ onEdit }: { onEdit: (id: string) => void }) {
   const [posts, setPosts] = useState<BlogPost[]>([])
   const [loading, setLoading] = useState(true)
-  const supabase = createClient()
+  // Using the singleton supabase client
 
   useEffect(() => {
     loadPosts()
