@@ -59,7 +59,7 @@ export default function AdminDashboard() {
   }
 
   const handleEditPost = (id: string) => {
-    setEditingPostId(id === 'new' ? null : id)
+    setEditingPostId(id)
   }
 
   const handleBackToList = () => {
