@@ -1,108 +1,40 @@
-# Costello Law Group Website
+# TinaCMS Setup for The Costello Law Group
 
-A modern, high-performance website for The Costello Law Group built with Next.js 15 and Sanity CMS.
+This document outlines the setup for the TinaCMS integration on the new website for The Costello Law Group and provides instructions for accessing and using the content management system.
 
-## Features
+## How to Access the CMS
 
-- ✅ Multi-step contact form
-- ✅ Google Reviews integration
-- ✅ Sanity CMS for content management
-- ✅ Responsive design with Tailwind CSS
-- ✅ Framer Motion animations
-- ✅ Blog system
-- ✅ Practice area pages
-- ✅ Attorney profiles
-- ✅ Case results showcase
+To access the TinaCMS admin interface, follow these steps:
 
-## Tech Stack
+1.  **Navigate to the admin URL**: Open your web browser and go to [https://thecostellolawgroup.com/admin](https://thecostellolawgroup.com/admin).
+2.  **Log in with GitHub**: You will be prompted to log in. Click the "Authenticate with GitHub" button and authorize the application.
 
-- **Framework:** Next.js 15.2.4
-- **CMS:** Sanity.io
-- **Styling:** Tailwind CSS 4.1.9
-- **UI Components:** Radix UI
-- **Animations:** Framer Motion
-- **Forms:** React Hook Form + Zod
-- **Email:** Resend
+Once you have logged in, you will be redirected to the homepage with the TinaCMS visual editor enabled.
 
-## Setup Instructions
+## How to Edit Content
 
-### 1. Install Dependencies
+With the visual editor, you can edit content directly on the page. Here’s how:
 
-```bash
-npm install --legacy-peer-deps
-```
+1.  **Navigate to the page you want to edit**: Use the website's navigation to go to the page you want to modify.
+2.  **Click on the content you want to change**: Editable regions will be highlighted. Click on any text or image to open the editor in the sidebar.
+3.  **Make your changes**: Use the sidebar to edit text, upload new images, or modify content fields.
+4.  **Save your changes**: Click the "Save" button in the sidebar. Your changes will be committed directly to the GitHub repository and a new deployment will be automatically triggered on Vercel.
 
-### 2. Configure Environment Variables
+## Content Collections
 
-Create a `.env.local` file in the root directory:
+The following content types are available for editing in the CMS:
 
-```env
-# Sanity CMS Configuration
-NEXT_PUBLIC_SANITY_PROJECT_ID=your-project-id
-NEXT_PUBLIC_SANITY_DATASET=production
-SANITY_API_TOKEN=your-api-token
+*   **Pages**: Static pages like the homepage, about us, etc.
+*   **Blog Posts**: Articles for the website's blog.
+*   **Testimonials**: Client testimonials and reviews.
+*   **Case Results**: Details of successful case outcomes.
+*   **Practice Areas**: Information about the firm's legal specializations.
+*   **Site Settings**: Global site information like contact details and social media links.
 
-# Email Configuration (Resend)
-RESEND_API_KEY=your-resend-api-key
+## Technical Details
 
-# Site Configuration
-NEXT_PUBLIC_SITE_URL=https://thecostellolawgroup.com
-```
+During the setup, we encountered a build issue with Vercel related to TinaCloud branch indexing. To resolve this, we implemented the following solution:
 
-### 3. Set Up Sanity CMS
+*   **`--skip-cloud-checks` flag**: The Vercel build command has been modified to `tinacms build --skip-cloud-checks && next build`. This flag tells the TinaCMS build process to bypass the check for TinaCloud branch indexing, which was causing the deployment to fail.
 
-1. Create a Sanity account at https://www.sanity.io
-2. Create a new project
-3. Copy the project ID to your `.env.local`
-4. Generate an API token with write permissions
-5. Add the token to your `.env.local`
-
-### 4. Run Development Server
-
-```bash
-npm run dev
-```
-
-Visit http://localhost:3000 to see the site.
-
-### 5. Access Sanity Studio
-
-Visit http://localhost:3000/studio to access the CMS.
-
-## Deployment
-
-### Deploy to Vercel
-
-1. Push code to GitHub
-2. Import project in Vercel
-3. Add environment variables in Vercel dashboard
-4. Deploy
-
-### Configure Custom Domain
-
-Add these DNS records to your domain registrar:
-
-**For Apex Domain (thecostellolawgroup.com):**
-- Type: A
-- Name: @
-- Value: 76.76.21.21
-
-**For WWW Subdomain:**
-- Type: CNAME
-- Name: www
-- Value: cname.vercel-dns.com
-
-## Content Management
-
-All content can be managed through the Sanity Studio at `/studio`:
-
-- Homepage content
-- Practice areas
-- Attorney profiles
-- Blog posts
-- Case results
-- Site settings
-
-## Support
-
-For issues or questions, contact the development team.
+This ensures that the site can be deployed reliably without being dependent on the TinaCloud indexing status. The CMS will continue to use TinaCloud for authentication and content synchronization.
