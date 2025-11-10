@@ -372,6 +372,92 @@ export default defineConfig({
         ],
       },
       {
+        name: "podcast",
+        label: "Podcasts",
+        path: "content/podcasts",
+        format: "mdx",
+        ui: {
+          router: ({ document }) => {
+            return `/podcasts/${document._sys.filename}`;
+          },
+        },
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Episode Title",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "string",
+            name: "description",
+            label: "Episode Description",
+            required: true,
+            ui: {
+              component: "textarea",
+            },
+          },
+          {
+            type: "number",
+            name: "episodeNumber",
+            label: "Episode Number",
+          },
+          {
+            type: "datetime",
+            name: "publishedAt",
+            label: "Published Date",
+            required: true,
+          },
+          {
+            type: "string",
+            name: "audioUrl",
+            label: "Audio File URL",
+            description: "URL to the podcast audio file (e.g., MP3)",
+          },
+          {
+            type: "number",
+            name: "duration",
+            label: "Duration (minutes)",
+          },
+          {
+            type: "image",
+            name: "coverImage",
+            label: "Episode Cover Image",
+          },
+          {
+            type: "string",
+            name: "hosts",
+            label: "Hosts",
+            list: true,
+          },
+          {
+            type: "string",
+            name: "guests",
+            label: "Guests",
+            list: true,
+          },
+          {
+            type: "string",
+            name: "tags",
+            label: "Tags",
+            list: true,
+          },
+          {
+            type: "boolean",
+            name: "draft",
+            label: "Draft (Unpublished)",
+            description: "Keep this checked to prevent the episode from showing on the site",
+          },
+          {
+            type: "rich-text",
+            name: "body",
+            label: "Show Notes",
+            isBody: true,
+          },
+        ],
+      },
+      {
         name: "settings",
         label: "Site Settings",
         path: "content/settings",
