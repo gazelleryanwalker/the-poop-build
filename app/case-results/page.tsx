@@ -8,82 +8,7 @@ import { DollarSign, Scale, TrendingUp } from "lucide-react"
 export default function CaseResultsPage() {
   const results = [
     {
-      amount: "$1.2 Million",
-      category: "Motorcycle Accident",
-      description:
-        "Motorcycle accident on Griffin Road resulting in severe injuries. Our client required extensive medical treatment and rehabilitation.",
-      outcome: "Jury verdict",
-    },
-    {
-      amount: "$850,000",
-      category: "Car Accident",
-      description:
-        "Car accident victim on Stirling Road suffered traumatic injuries. We proved the other driver's negligence and secured maximum compensation.",
-      outcome: "Settlement",
-    },
-    {
-      amount: "$675,000",
-      category: "Premises Liability",
-      description:
-        "Premises liability case at a Cooper City apartment complex. Property owner failed to maintain safe conditions.",
-      outcome: "Settlement",
-    },
-    {
-      amount: "$425,000",
-      category: "Slip and Fall",
-      description:
-        "Slip and fall at a local shopping center resulted in hip fracture and complications requiring surgery.",
-      outcome: "Settlement",
-    },
-    {
-      amount: "$380,000",
-      category: "Truck Accident",
-      description: "Commercial truck accident on Florida Turnpike. Negligent trucking company held accountable.",
-      outcome: "Settlement",
-    },
-    {
-      amount: "$295,000",
-      category: "Car Accident",
-      description: "Rear-end collision at Cooper City intersection caused severe whiplash and back injuries.",
-      outcome: "Settlement",
-    },
-    {
-      amount: "$250,000",
-      category: "Motorcycle Accident",
-      description: "Motorcycle accident caused by distracted driver. Our client suffered multiple fractures.",
-      outcome: "Settlement",
-    },
-    {
-      amount: "$185,000",
-      category: "Premises Liability",
-      description: "Inadequate security at local business led to assault. Property owner held liable.",
-      outcome: "Settlement",
-    },
-    {
-      amount: "$165,000",
-      category: "Car Accident",
-      description: "DUI-related collision on Flamingo Road. Drunk driver caused serious injuries to our client.",
-      outcome: "Settlement",
-    },
-    {
-      amount: "$145,000",
-      category: "Slip and Fall",
-      description: "Slip and fall at Cooper City restaurant due to wet floor without warning signs.",
-      outcome: "Settlement",
-    },
-    {
-      amount: "$125,000",
-      category: "Dog Bite",
-      description:
-        "Severe dog bite injuries in residential neighborhood. Owner had prior knowledge of dog's aggression.",
-      outcome: "Settlement",
-    },
-    {
-      amount: "$95,000",
-      category: "Bicycle Accident",
-      description: "Cyclist struck by negligent driver in Cooper City. Our client suffered broken bones and road rash.",
-      outcome: "Settlement",
-    },
+     
   ]
 
   const testimonials = [
@@ -144,59 +69,7 @@ export default function CaseResultsPage() {
         </div>
       </section>
 
-      {/* Notable Results */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="font-serif text-4xl lg:text-5xl font-bold text-foreground mb-4">Notable Results</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Recent verdicts and settlements achieved for our clients
-            </p>
-            <p className="text-sm text-muted-foreground mt-4 italic">
-              *Past results do not guarantee future outcomes. Every case is unique.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {results.map((result, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-6">
-                  <div className="text-3xl font-serif font-bold text-accent mb-2">{result.amount}</div>
-                  <div className="text-sm font-semibold text-primary mb-3">{result.category}</div>
-                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{result.description}</p>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider">{result.outcome}</div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Client Testimonials */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 to-slate-100">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="font-serif text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Client Stories</h2>
-            <p className="text-lg text-gray-600">Hear from Cooper City clients whose lives we've helped change</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="bg-white shadow-lg hover:shadow-xl transition-shadow">
-                <CardContent className="p-6">
-                  <div className="text-4xl text-[#00A878] mb-4">"</div>
-                  <p className="text-gray-700 mb-6 leading-relaxed italic">{testimonial.quote}</p>
-                  <div className="border-t border-gray-200 pt-4">
-                    <div className="font-semibold text-gray-900">{testimonial.author}</div>
-                    <div className="text-sm text-gray-600">{testimonial.case}</div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
+    
       {/* Disclaimer */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-muted/50">
         <div className="max-w-4xl mx-auto text-center">
