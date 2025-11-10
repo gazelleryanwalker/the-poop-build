@@ -20,9 +20,9 @@ export default defineConfig({
     publicFolder: "public",
   },
   media: {
-    tina: {
-      mediaRoot: "uploads",
-      publicFolder: "public",
+    loadCustomStore: async () => {
+      const pack = await import("next-tinacms-cloudinary");
+      return pack.TinaCloudCloudinaryMediaStore;
     },
   },
   schema: {
@@ -350,6 +350,182 @@ export default defineConfig({
         ],
         ui: {
           router: ({ document }) => `/practice-areas/${document._sys.filename}`,
+        },
+      },
+      // Team Members Collection
+      {
+        name: "team",
+        label: "Team Members",
+        path: "content/team",
+        format: "json",
+        fields: [
+          {
+            type: "string",
+            name: "name",
+            label: "Full Name",
+            required: true,
+          },
+          {
+            type: "string",
+            name: "position",
+            label: "Position/Title",
+            required: true,
+          },
+          {
+            type: "image",
+            name: "photo",
+            label: "Profile Photo",
+          },
+          {
+            type: "string",
+            name: "email",
+            label: "Email Address",
+          },
+          {
+            type: "string",
+            name: "phone",
+            label: "Phone Number",
+          },
+          {
+            type: "string",
+            name: "bio",
+            label: "Biography",
+            ui: {
+              component: "textarea",
+            },
+          },
+          {
+            type: "object",
+            name: "social",
+            label: "Social Media",
+            fields: [
+              {
+                type: "string",
+                name: "linkedin",
+                label: "LinkedIn URL",
+              },
+              {
+                type: "string",
+                name: "twitter",
+                label: "Twitter/X URL",
+              },
+            ],
+          },
+          {
+            type: "number",
+            name: "order",
+            label: "Display Order",
+          },
+        ],
+      },
+      // FAQ Collection
+      {
+        name: "faq",
+        label: "FAQ Items",
+        path: "content/faq",
+        format: "json",
+        fields: [
+          {
+            type: "string",
+            name: "question",
+            label: "Question",
+            required: true,
+          },
+          {
+            type: "string",
+            name: "answer",
+            label: "Answer",
+            required: true,
+            ui: {
+              component: "textarea",
+            },
+          },
+          {
+            type: "string",
+            name: "category",
+            label: "Category",
+            options: [
+              "General",
+              "Personal Injury",
+              "Car Accidents",
+              "Workers Compensation",
+              "Medical Malpractice",
+              "Other",
+            ],
+          },
+          {
+            type: "number",
+            name: "order",
+            label: "Display Order",
+          },
+        ],
+      },
+      // Services Collection
+      {
+        name: "service",
+        label: "Service Pages",
+        path: "content/services",
+        format: "mdx",
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Service Title",
+            required: true,
+          },
+          {
+            type: "string",
+            name: "slug",
+            label: "URL Slug",
+            required: true,
+          },
+          {
+            type: "string",
+            name: "description",
+            label: "Short Description",
+            ui: {
+              component: "textarea",
+            },
+          },
+          {
+            type: "image",
+            name: "image",
+            label: "Featured Image",
+          },
+          {
+            type: "rich-text",
+            name: "body",
+            label: "Service Content",
+            isBody: true,
+          },
+          {
+            type: "object",
+            name: "seo",
+            label: "SEO Settings",
+            fields: [
+              {
+                type: "string",
+                name: "title",
+                label: "SEO Title",
+              },
+              {
+                type: "string",
+                name: "description",
+                label: "SEO Description",
+                ui: {
+                  component: "textarea",
+                },
+              },
+              {
+                type: "string",
+                name: "keywords",
+                label: "SEO Keywords",
+              },
+            ],
+          },
+        ],
+        ui: {
+          router: ({ document }) => `/services/${document._sys.filename}`,
         },
       },
       // Site Settings
