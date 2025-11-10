@@ -9,12 +9,30 @@ import { getPostBySlug, getAllPosts } from "@/lib/tina-client"
 import { TinaMarkdown } from "tinacms/dist/rich-text"
 
 export const revalidate = 60 // Revalidate every 60 seconds
+export const dynamicParams = true // Allow dynamic params for posts not in generateStaticParams
 
 export async function generateStaticParams() {
-  const posts = await getAllPosts()
-  return posts.map((post: any) => ({
-    slug: post._sys?.filename?.replace('.mdx', '') || post.slug,
-  }))
+  try {
+    const posts = await getAllPosts()
+    const tinaPaths = posts.map((post: any) => ({
+      slug: post._sys?.filename?.replace('.mdx', '') || post.slug,
+    }))
+    
+    // Add fallback slugs for content that exists in the content directory
+    const fallbackSlugs = [
+      { slug: 'understanding-personal-injury-claims' },
+      { slug: 'what-to-do-after-car-accident' },
+    ]
+    
+    return [...tinaPaths, ...fallbackSlugs]
+  } catch (error) {
+    console.error('Error generating static params:', error)
+    // Return fallback slugs if TinaCMS fails
+    return [
+      { slug: 'understanding-personal-injury-claims' },
+      { slug: 'what-to-do-after-car-accident' },
+    ]
+  }
 }
 
 interface BlogPostPageProps {
