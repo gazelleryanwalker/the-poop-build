@@ -1,0 +1,23 @@
+{
+  "company": {
+    "name": "The Costello Law Group",
+    "tagline": "Expert Legal Representation",
+    "description": "The Costello Law Group delivers personalized legal solutions with proven results. Specializing in personal injury, insurance claims, and criminal defense across Cooper City, Davie, Plantation, and Pembroke Pines."
+  },
+  "contact": {
+    "phone": "(954) 591-8099",
+    "email": "joshuacostello2013@gmail.com",
+    "address": "Serving Broward County, Florida"
+  },
+  "social": {
+    "facebook": "https://facebook.com/costellolawgroup",
+    "twitter": "",
+    "instagram": "",
+    "linkedin": "",
+    "youtube": ""
+  },
+  "theme": {
+    "primary": "#00A878",
+    "secondary": "#0A1628"
+  }
+}
