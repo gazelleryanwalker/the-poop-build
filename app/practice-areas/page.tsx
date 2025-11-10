@@ -24,7 +24,7 @@ export default function PracticeAreasPage() {
         "Hit-and-run accidents",
         "Distracted driving accidents",
       ],
-      results: "100+ successful car accident cases",
+      results: " car accident cases",
     },
     {
       id: "truck-accidents",
@@ -40,23 +40,10 @@ export default function PracticeAreasPage() {
         "Truck driver negligence",
         "Trucking company liability",
       ],
-      results: "Millions recovered for truck accident victims",
+      results: " ",
     },
     {
-      id: "motorcycle-accidents",
-      icon: Bike,
-      title: "Motorcycle Accidents",
-      description:
-        "Motorcyclists face unique dangers on the road. We understand the complexities of motorcycle accident claims.",
-      details: [
-        "Lane splitting accidents",
-        "Left-turn collisions",
-        "Road hazard accidents",
-        "Defective motorcycle parts",
-        "Motorcycle vs. car accidents",
-        "Serious injury claims",
-      ],
-      results: "Dedicated motorcycle accident representation",
+      
     },
     {
       id: "rideshare-accidents",
