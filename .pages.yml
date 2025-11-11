@@ -1,6 +1,3 @@
-# Pages CMS Configuration for The Costello Law Group
-# This configuration file defines the content structure for the website
-# without any TinaCMS, Sanity, or admin functionality
 
 # Collection configurations for content types
 collections_config:
