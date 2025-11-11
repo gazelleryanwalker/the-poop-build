@@ -1,0 +1,265 @@
+# Pages CMS Configuration for The Costello Law Group
+# Documentation: https://pagescms.org/docs/configuration/
+
+# Basic configuration
+title: The Costello Law Group CMS
+description: Content management for thecostellolawgroup.com
+
+# Collections define the types of content you can manage
+collections:
+  # Blog Posts
+  - name: posts
+    label: Blog Posts
+    description: Legal articles and industry news
+    path: content/posts
+    extension: mdx
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: slug
+        label: URL Slug
+        type: string
+        required: true
+      - name: date
+        label: Publication Date
+        type: datetime
+        required: true
+      - name: author
+        label: Author
+        type: string
+        default: Joshua Costello, Esq.
+      - name: excerpt
+        label: Excerpt
+        type: text
+        description: Short summary shown in listings
+      - name: featured_image
+        label: Featured Image
+        type: image
+        description: Main image for the post
+      - name: category
+        label: Category
+        type: select
+        options:
+          - Personal Injury
+          - Auto Accidents
+          - Insurance Claims
+          - Criminal Defense
+          - Legal News
+          - Case Studies
+      - name: tags
+        label: Tags
+        type: list
+        description: Keywords for the post
+      - name: body
+        label: Content
+        type: rich-text
+        required: true
+
+  # Pages
+  - name: pages
+    label: Pages
+    description: Website pages
+    path: content/pages
+    extension: mdx
+    fields:
+      - name: title
+        label: Page Title
+        type: string
+        required: true
+      - name: slug
+        label: Page Slug
+        type: string
+        required: true
+        description: URL path for this page (e.g., /about, /contact)
+      - name: hero_heading
+        label: Hero Heading
+        type: string
+      - name: hero_subheading
+        label: Hero Subheading
+        type: text
+      - name: body
+        label: Page Content
+        type: rich-text
+
+  # Practice Areas
+  - name: practice-areas
+    label: Practice Areas
+    description: Legal services offered
+    path: content/practice-areas
+    extension: mdx
+    fields:
+      - name: title
+        label: Practice Area Title
+        type: string
+        required: true
+      - name: slug
+        label: URL Slug
+        type: string
+        required: true
+      - name: icon
+        label: Icon Name
+        type: select
+        options:
+          - Car
+          - Truck
+          - Bike
+          - Scale
+          - HomeIcon
+          - Dog
+          - FileText
+          - Gavel
+          - Shield
+          - Users
+        description: Icon to display for this practice area
+      - name: description
+        label: Short Description
+        type: text
+        description: Brief description shown in cards
+      - name: order
+        label: Display Order
+        type: number
+        default: 0
+        description: Lower numbers appear first
+      - name: featured
+        label: Featured
+        type: boolean
+        default: false
+      - name: body
+        label: Detailed Content
+        type: rich-text
+
+  # Testimonials
+  - name: testimonials
+    label: Testimonials
+    description: Client reviews and feedback
+    path: content/testimonials
+    extension: json
+    fields:
+      - name: client_name
+        label: Client Name
+        type: string
+        required: true
+      - name: case_type
+        label: Case Type
+        type: string
+        required: true
+        description: E.g., 'Personal Injury Client', 'Car Accident Client'
+      - name: quote
+        label: Testimonial Quote
+        type: text
+        required: true
+      - name: rating
+        label: Rating
+        type: number
+        default: 5
+        min: 1
+        max: 5
+        description: Star rating (1-5)
+      - name: featured
+        label: Featured
+        type: boolean
+        default: false
+        description: Display on homepage
+      - name: date
+        label: Date
+        type: datetime
+        description: When the testimonial was received
+
+  # Case Results
+  - name: case-results
+    label: Case Results
+    description: Settlement outcomes and wins
+    path: content/case-results
+    extension: json
+    fields:
+      - name: title
+        label: Case Title
+        type: string
+        required: true
+      - name: case_type
+        label: Case Type
+        type: select
+        options:
+          - Car Accident
+          - Truck Accident
+          - Motorcycle Accident
+          - Slip and Fall
+          - Premises Liability
+          - Dog Bite
+          - Wrongful Death
+          - Insurance Claim
+          - Criminal Defense
+          - Other
+      - name: settlement_amount
+        label: Settlement Amount
+        type: string
+        description: E.g., '$500,000' or 'Confidential'
+      - name: description
+        label: Case Description
+        type: text
+      - name: outcome
+        label: Outcome
+        type: text
+      - name: featured
+        label: Featured
+        type: boolean
+        default: false
+      - name: date
+        label: Settlement Date
+        type: datetime
+
+  # Site Settings
+  - name: settings
+    label: Site Settings
+    description: Site-wide configuration
+    path: content/settings
+    extension: json
+    format: file
+    file: content/settings/site.json
+    fields:
+      - name: company_name
+        label: Company Name
+        type: string
+        default: The Costello Law Group
+      - name: tagline
+        label: Tagline
+        type: string
+        default: Expert Legal Representation
+      - name: phone
+        label: Phone Number
+        type: string
+        default: (954) 591-8099
+      - name: email
+        label: Email Address
+        type: string
+        default: joshua@thecostellolawgroup.com
+      - name: address
+        label: Address
+        type: string
+        default: 5846 S Flamingo Rd. Ste. 520, Cooper City, FL 33330
+      - name: facebook
+        label: Facebook URL
+        type: string
+      - name: twitter
+        label: Twitter URL
+        type: string
+      - name: linkedin
+        label: LinkedIn URL
+        type: string
+      - name: instagram
+        label: Instagram URL
+        type: string
+
+# Media settings
+media:
+  input: public
+  output: public
+  public: /
+
+# Site metadata
+site:
+  url: https://thecostellolawgroup.com
+  name: The Costello Law Group
+  description: Personal injury, insurance claims, and criminal defense attorneys serving Broward County, Florida
