@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import Link from "next/link"
 import { Calendar, Clock, ArrowRight } from "lucide-react"
 import Image from "next/image"
-import { getAllPosts } from "@/lib/tina-client"
+import { getAllPosts } from "@/lib/content"
 
 export const revalidate = 60 // Revalidate every 60 seconds
 

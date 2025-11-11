@@ -5,8 +5,7 @@ import Link from "next/link"
 import { Calendar, Clock, ArrowLeft, Phone } from "lucide-react"
 import Image from "next/image"
 import { notFound } from "next/navigation"
-import { getPostBySlug, getAllPosts } from "@/lib/tina-client"
-import { TinaMarkdown } from "tinacms/dist/rich-text"
+import { getPostBySlug, getAllPosts } from "@/lib/content"
 
 export const revalidate = 60 // Revalidate every 60 seconds
 export const dynamicParams = true // Allow dynamic params for posts not in generateStaticParams
@@ -115,7 +114,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <article className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="prose prose-lg prose-slate max-w-none">
-            {post.body && <TinaMarkdown content={post.body} />}
+            <div dangerouslySetInnerHTML={{ __html: post.body || '' }} />
           </div>
 
           {/* Tags */}
