@@ -1,0 +1,40 @@
+{
+  "name": "Joshua Costello",
+  "title": "Founder & Lead Attorney",
+  "slug": "joshua-costello",
+  "bio": "Joshua Costello is the founding attorney at The Costello Law Group with over 15 years of experience in personal injury and criminal defense. He has successfully recovered millions in settlements for his clients and has earned a reputation as a dedicated advocate for those injured by negligence.",
+  "photo": "/images/team/joshua-costello.jpg",
+  "credentials": [
+    "Juris Doctor, University of Florida College of Law",
+    "Board Certified in Civil Trial Law",
+    "Florida Bar License #123456"
+  ],
+  "bar_status": "Florida",
+  "education": [
+    {
+      "school": "University of Florida College of Law",
+      "degree": "Juris Doctor",
+      "year": 2009
+    },
+    {
+      "school": "University of Florida",
+      "degree": "Bachelor of Science in Business Administration",
+      "year": 2006
+    }
+  ],
+  "experience_years": 15,
+  "specialties": [
+    "Personal Injury",
+    "Auto Accidents",
+    "Truck Accidents",
+    "Insurance Claims",
+    "Criminal Defense"
+  ],
+  "social_links": {
+    "linkedin": "https://linkedin.com/in/joshuacostello",
+    "facebook": "https://facebook.com/joshuacostello",
+    "twitter": "https://twitter.com/joshuacostello"
+  },
+  "featured": true,
+  "display_order": 1
+}

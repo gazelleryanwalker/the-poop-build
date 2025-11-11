@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import client from '../tina/__generated__/client';
+import { getAllPosts, getAllPracticeAreas } from '@/lib/pages-client';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://thecostellolawgroup.com';
@@ -33,25 +33,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   try {
-    // Fetch blog posts from TinaCMS
-    const postsResponse = await client.queries.postConnection();
-    const posts: MetadataRoute.Sitemap = (postsResponse.data.postConnection.edges || []).map((edge: any) => ({
-      url: `${baseUrl}/blog/${edge.node?._sys.filename}`,
-      lastModified: new Date(edge.node?._sys.lastModified || Date.now()),
+    // Fetch blog posts from Pages CMS
+    const posts = await getAllPosts();
+    const postsUrls: MetadataRoute.Sitemap = posts.map((post: any) => ({
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: new Date(post.date || Date.now()),
       changeFrequency: 'weekly' as const,
       priority: 0.7,
     }));
 
-    // Fetch practice areas from TinaCMS
-    const practiceAreasResponse = await client.queries.practice_areaConnection();
-    const practiceAreas: MetadataRoute.Sitemap = (practiceAreasResponse.data.practice_areaConnection.edges || []).map((edge: any) => ({
-      url: `${baseUrl}/practice-areas/${edge.node?._sys.filename}`,
-      lastModified: new Date(edge.node?._sys.lastModified || Date.now()),
+    // Fetch practice areas from Pages CMS
+    const practiceAreas = await getAllPracticeAreas();
+    const practiceAreasUrls: MetadataRoute.Sitemap = practiceAreas.map((area: any) => ({
+      url: `${baseUrl}/practice-areas/${area.slug}`,
+      lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     }));
 
-    return [...staticPages, ...posts, ...practiceAreas];
+    return [...staticPages, ...postsUrls, ...practiceAreasUrls];
   } catch (error) {
     console.error('Error generating sitemap:', error);
     return staticPages;

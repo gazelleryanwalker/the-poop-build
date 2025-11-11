@@ -1,585 +1,1314 @@
-# Pages CMS Configuration for The Costello Law Group
-# This configuration file defines the content structure for the website
-# without any TinaCMS, Sanity, or admin functionality
+media:
+  hero_images:
+    folder: public/images/hero
+    extensions:
+      - jpg
+      - jpeg
+      - png
+  general_images:
+    folder: public/images
+    extensions:
+      - jpg
+      - jpeg
+      - png
+      - svg
+      - webp
+  team_photos:
+    folder: public/images/team
+    extensions:
+      - jpg
+      - jpeg
+      - png
+  blog_images:
+    folder: public/images/blog
+    extensions:
+      - jpg
+      - jpeg
+      - png
+      - webp
+  documents:
+    folder: public/documents
+    extensions:
+      - pdf
+      - doc
+      - docx
+  vector_assets:
+    folder: public/images/icons
+    extensions:
+      - svg
 
-# Collection configurations for content types
-collections_config:
-  # Site Settings
+components:
+  # 1. STRING FIELD EXAMPLES - Single line text with validation
+  string_field_example:
+    label: String Field Example
+    fields:
+      - name: basic_string
+        label: Basic String
+        type: string
+      - name: seo_title
+        label: SEO Title (max 60 chars)
+        type: string
+        options:
+          maxlength: 60
+      - name: description_short
+        label: Short Description (20-160 chars)
+        type: string
+        options:
+          minlength: 20
+          maxlength: 160
+
+  # 2. TEXT FIELD EXAMPLES - Multi-line text with constraints
+  text_field_example:
+    label: Text Field Example
+    fields:
+      - name: basic_text
+        label: Basic Textarea
+        type: text
+      - name: tweet_content
+        label: Tweet (max 140 chars)
+        type: text
+        options:
+          maxlength: 140
+      - name: bio
+        label: Biography
+        type: text
+        options:
+          minlength: 50
+          maxlength: 500
+          autoresize: true
+          rows: 5
+
+  # 3. BOOLEAN FIELD EXAMPLE - Toggle/switch
+  boolean_field_example:
+    label: Boolean Field Example
+    fields:
+      - name: is_published
+        label: Published
+        type: boolean
+        default: true
+      - name: is_featured
+        label: Featured
+        type: boolean
+        default: false
+      - name: enable_comments
+        label: Enable Comments
+        type: boolean
+
+  # 4. NUMBER FIELD EXAMPLES - Numeric input with constraints
+  number_field_example:
+    label: Number Field Example
+    fields:
+      - name: age
+        label: Age (min 21)
+        type: number
+        options:
+          min: 21
+      - name: rating
+        label: Rating (1-5, 0.5 increments)
+        type: number
+        options:
+          min: 1
+          max: 5
+          step: 0.5
+      - name: price
+        label: Price (0-10000, $0.01 increments)
+        type: number
+        options:
+          min: 0
+          max: 10000
+          step: 0.01
+      - name: display_order
+        label: Display Order
+        type: number
+        options:
+          min: 1
+          step: 1
+
+  # 5. DATE FIELD EXAMPLES - Date and datetime inputs
+  date_field_example:
+    label: Date Field Example
+    fields:
+      - name: publish_date
+        label: Publish Date (yyyy-MM-dd)
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: start_time
+        label: Start DateTime (dd-MM-yyyy HH:mm)
+        type: date
+        options:
+          time: true
+          format: dd-MM-yyyy HH:mm
+      - name: event_date
+        label: Event Date (must be 2024 or later)
+        type: date
+        options:
+          format: yyyy-MM-dd
+          min: "2024-01-01"
+
+  # 6. CODE FIELD EXAMPLES - Syntax-highlighted code editor
+  code_field_example:
+    label: Code Field Example
+    fields:
+      - name: schema_json
+        label: Schema (JSON)
+        type: code
+        options:
+          language: json
+      - name: html_template
+        label: HTML Template
+        type: code
+        options:
+          language: html
+      - name: js_snippet
+        label: JavaScript
+        type: code
+        options:
+          language: javascript
+      - name: yaml_config
+        label: YAML Config
+        type: code
+        options:
+          language: yaml
+      - name: markdown_content
+        label: Markdown Content
+        type: code
+        options:
+          language: markdown
+
+  # 7. IMAGE FIELD EXAMPLES - Single and multiple images with constraints
+  image_field_example:
+    label: Image Field Example
+    fields:
+      - name: featured_image
+        label: Featured Image
+        type: image
+        options:
+          media: general_images
+      - name: gallery
+        label: Image Gallery (max 6)
+        type: image
+        options:
+          media: general_images
+          multiple:
+            max: 6
+      - name: carousel
+        label: Carousel Images (2-8 images)
+        type: image
+        options:
+          media: blog_images
+          multiple:
+            min: 2
+            max: 8
+      - name: icon
+        label: Icon (SVG only)
+        type: image
+        options:
+          media: vector_assets
+          extensions: [svg]
+
+  # 8. FILE FIELD EXAMPLES - File uploads with constraints
+  file_field_example:
+    label: File Field Example
+    fields:
+      - name: single_document
+        label: Single Document
+        type: file
+        options:
+          media: documents
+      - name: resources
+        label: Resource Downloads (max 5 PDFs)
+        type: file
+        options:
+          media: documents
+          extensions: [pdf]
+          multiple:
+            max: 5
+      - name: attachments
+        label: Attachments (any type)
+        type: file
+        options:
+          media: documents
+          multiple: true
+
+  # 9. SELECT FIELD EXAMPLES - Dropdowns with static/dynamic options
+  select_field_example:
+    label: Select Field Example
+    fields:
+      - name: category
+        label: Category (simple list)
+        type: select
+        options:
+          values: [Technology, News, Sports]
+      - name: priority
+        label: Priority (objects with label/value)
+        type: select
+        options:
+          values:
+            - value: low
+              label: Low Priority
+            - value: medium
+              label: Medium Priority
+            - value: high
+              label: High Priority
+      - name: tags
+        label: Tags (multiple + creatable)
+        type: select
+        options:
+          multiple: true
+          creatable: true
+          values: []
+      - name: assignee
+        label: Assignee (GitHub API autocomplete)
+        type: select
+        options:
+          fetch:
+            url: https://api.github.com/search/users
+            params:
+              q: ""
+            results: items
+            value: login
+            label: ""
+            image: avatar_url
+            minlength: 2
+            headers:
+              Accept: application/vnd.github.v3+json
+
+  # 10. RICH-TEXT FIELD EXAMPLES - WYSIWYG with formatting, tables, images
+  rich_text_field_example:
+    label: Rich-Text Field Example
+    fields:
+      - name: basic_content
+        label: Basic Rich-Text
+        type: rich-text
+      - name: article_body
+        label: Article Body (JPG/PNG/WebP only)
+        type: rich-text
+        options:
+          media: blog_images
+          extensions: [jpg, jpeg, png, webp]
+      - name: description
+        label: Description (images disabled)
+        type: rich-text
+        options:
+          media: false
+
+  # 11. OBJECT FIELD EXAMPLES - Nested grouped fields
+  object_field_example:
+    label: Object Field Example
+    fields:
+      - name: contact_info
+        label: Contact Information
+        type: object
+        fields:
+          - name: first_name
+            label: First Name
+            type: string
+          - name: last_name
+            label: Last Name
+            type: string
+          - name: email
+            label: Email
+            type: string
+          - name: phone
+            label: Phone
+            type: string
+      - name: location
+        label: Location
+        type: object
+        fields:
+          - name: street
+            label: Street Address
+            type: string
+          - name: city
+            label: City
+            type: string
+          - name: state
+            label: State
+            type: string
+          - name: zip_code
+            label: Zip Code
+            type: string
+
+  # 12. REFERENCE FIELD EXAMPLES - Cross-collection linking
+  reference_field_example:
+    label: Reference Field Example
+    fields:
+      - name: featured_post
+        label: Featured Post
+        type: reference
+        options:
+          collection: blog
+      - name: related_cases
+        label: Related Cases (multiple)
+        type: reference
+        options:
+          collection: case_results
+          multiple: true
+      - name: practice_areas
+        label: Practice Areas (searchable)
+        type: reference
+        options:
+          collection: practice_areas
+          multiple: true
+          search: "title,description"
+
+  # 13. UUID FIELD EXAMPLE - Auto-generated unique IDs
+  uuid_field_example:
+    label: UUID Field Example
+    fields:
+      - name: unique_id
+        label: Unique ID (editable)
+        type: uuid
+      - name: immutable_id
+        label: Immutable ID (not editable)
+        type: uuid
+        options:
+          editable: false
+
+  # 14. BLOCK FIELD EXAMPLES - Page builder with multiple block types
+  block_field_example:
+    label: Block Field Example
+    fields:
+      - name: page_sections
+        label: Page Sections
+        type: block
+        options:
+          blockKey: section_type
+          blocks:
+            - name: hero
+              label: Hero Section
+              fields:
+                - name: title
+                  label: Title
+                  type: string
+                - name: subtitle
+                  label: Subtitle
+                  type: text
+                - name: background_image
+                  label: Background Image
+                  type: image
+                  options:
+                    media: hero_images
+                - name: cta_text
+                  label: Call-to-Action Text
+                  type: string
+                - name: cta_link
+                  label: CTA Link
+                  type: string
+            - name: text_section
+              label: Text Section
+              fields:
+                - name: heading
+                  label: Heading
+                  type: string
+                - name: content
+                  label: Content
+                  type: rich-text
+                  options:
+                    media: general_images
+            - name: gallery
+              label: Image Gallery
+              fields:
+                - name: title
+                  label: Gallery Title
+                  type: string
+                - name: images
+                  label: Images (2-8)
+                  type: image
+                  options:
+                    media: general_images
+                    multiple:
+                      min: 2
+                      max: 8
+            - name: testimonials
+              label: Testimonials Block
+              fields:
+                - name: title
+                  label: Section Title
+                  type: string
+                - name: testimonials_list
+                  label: Testimonials
+                  type: reference
+                  options:
+                    collection: testimonials
+                    multiple: true
+
+  seo:
+    label: SEO
+    fields:
+      - name: seo_title
+        label: SEO Title
+        type: string
+        options:
+          maxlength: 60
+      - name: seo_description
+        label: SEO Description
+        type: text
+        options:
+          maxlength: 160
+      - name: seo_image
+        label: SEO Image
+        type: image
+        options:
+          media: general_images
+      - name: schema_markup
+        label: Schema Markup (JSON)
+        type: code
+        options:
+          language: json
+
+  hero_section:
+    label: Hero Section
+    fields:
+      - name: title
+        label: Title
+        type: string
+      - name: subtitle
+        label: Subtitle
+        type: text
+      - name: background_image
+        label: Background Image
+        type: image
+        options:
+          media: hero_images
+      - name: text_color
+        label: Text Color
+        type: select
+        options:
+          values:
+            - value: white
+              label: White
+            - value: black
+              label: Black
+            - value: dark_blue
+              label: Dark Blue
+      - name: height
+        label: Height
+        type: select
+        options:
+          values:
+            - value: small
+              label: Small
+            - value: medium
+              label: Medium
+            - value: large
+              label: Large
+
+  button:
+    label: Button
+    fields:
+      - name: text
+        label: Button Text
+        type: string
+      - name: url
+        label: URL
+        type: string
+      - name: style
+        label: Style
+        type: select
+        options:
+          values: [Primary, Secondary, Outline]
+      - name: open_new_window
+        label: Open in New Window
+        type: boolean
+        default: false
+
+  social_links:
+    label: Social Links
+    fields:
+      - name: platform
+        label: Platform
+        type: string
+      - name: url
+        label: URL
+        type: string
+
+  contact_info:
+    label: Contact Information
+    type: object
+    fields:
+      - name: phone
+        label: Phone
+        type: string
+      - name: email
+        label: Email
+        type: string
+      - name: address
+        label: Address
+        type: text
+
+content:
   settings:
-    path: content/settings
-    name: Site Settings
-    icon: settings
-    disable_add: true
-    disable_file_actions: true
-    schemas:
-      default:
-        path: schemas/settings.md
-    _enabled_editors:
-      - data
-  
-  # Pages collection
+    type: file
+    file: content/settings/site.json
+    label: Site Settings
+    description: Global site configuration
+    fields:
+      - name: site_title
+        label: Site Title
+        type: string
+      - name: site_description
+        label: Site Description
+        type: text
+      - name: logo
+        label: Logo
+        type: image
+        options:
+          media: general_images
+      - name: phone_number
+        label: Phone Number
+        type: string
+      - name: email
+        label: Email Address
+        type: string
+      - name: location
+        label: Location
+        type: string
+      - name: social_media
+        label: Social Media Links
+        type: object
+        fields:
+          - name: facebook
+            label: Facebook URL
+            type: string
+          - name: twitter
+            label: Twitter URL
+            type: string
+          - name: linkedin
+            label: LinkedIn URL
+            type: string
+          - name: instagram
+            label: Instagram URL
+            type: string
+      - name: api_keys
+        label: API Configuration
+        type: code
+        options:
+          language: json
+
+  homepage:
+    type: file
+    file: content/pages/home.md
+    label: Homepage
+    fields:
+      - name: title
+        label: Title
+        type: string
+      - name: page_sections
+        label: Page Sections
+        type: block
+        options:
+          blockKey: section_type
+          blocks:
+            - name: hero
+              label: Hero Section
+              fields:
+                - name: title
+                  label: Title
+                  type: string
+                - name: subtitle
+                  label: Subtitle
+                  type: text
+                - name: cta_text
+                  label: CTA Text
+                  type: string
+                - name: background_image
+                  label: Background Image
+                  type: image
+                  options:
+                    media: hero_images
+            - name: features
+              label: Features Section
+              fields:
+                - name: title
+                  label: Section Title
+                  type: string
+                - name: description
+                  label: Description
+                  type: text
+                - name: show_feature
+                  label: Show Features
+                  type: boolean
+                  default: true
+            - name: recent_posts
+              label: Recent Blog Posts
+              fields:
+                - name: title
+                  label: Section Title
+                  type: string
+                - name: featured_posts
+                  label: Featured Posts
+                  type: reference
+                  options:
+                    collection: blog
+                    multiple: true
+
   pages:
-    path: content/pages
-    name: Pages
-    icon: description
-    disable_add: false
-    schemas:
-      default:
-        path: schemas/page.md
-    _enabled_editors:
-      - content
-      - visual
-  
-  # Blog Posts / Industry News
-  posts:
-    path: content/posts
-    name: Blog Posts
-    icon: article
-    sort_key: date
-    sort:
-      key: date
-      order: desc
-    schemas:
-      default:
-        path: schemas/post.md
-    _enabled_editors:
-      - content
-      - visual
-  
-  # Practice Areas / Services
+    type: collection
+    folder: content/pages
+    label: Pages
+    format: yaml+md
+    fields:
+      - name: title
+        label: Page Title
+        type: string
+      - name: slug
+        label: URL Slug
+        type: string
+        options:
+          minlength: 1
+          maxlength: 100
+      - name: body
+        label: Page Content
+        type: rich-text
+        options:
+          media: general_images
+          extensions: [jpg, jpeg, png, webp]
+
+  blog:
+    type: collection
+    folder: content/posts
+    label: Blog Posts
+    format: yaml+md
+    fields:
+      - name: title
+        label: Post Title
+        type: string
+      - name: slug
+        label: URL Slug
+        type: string
+      - name: date
+        label: Published Date
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: author
+        label: Author
+        type: string
+      - name: category
+        label: Category
+        type: select
+        options:
+          values:
+            - value: personal_injury
+              label: Personal Injury
+            - value: car_accidents
+              label: Car Accidents
+            - value: slip_fall
+              label: Slip & Fall
+            - value: product_liability
+              label: Product Liability
+      - name: tags
+        label: Tags
+        type: select
+        options:
+          multiple: true
+          creatable: true
+          values: []
+      - name: featured_image
+        label: Featured Image
+        type: image
+        options:
+          media: blog_images
+      - name: featured
+        label: Featured Post
+        type: boolean
+        default: false
+      - name: body
+        label: Post Content
+        type: rich-text
+        options:
+          media: blog_images
+
   practice_areas:
-    path: content/practice-areas
-    name: Practice Areas
-    icon: gavel
-    schemas:
-      default:
-        path: schemas/practice-area.md
-    _enabled_editors:
-      - content
-  
-  # Testimonials
-  testimonials:
-    path: content/testimonials
-    name: Testimonials
-    icon: format_quote
-    schemas:
-      default:
-        path: schemas/testimonial.md
-    _enabled_editors:
-      - data
-  
-  # Case Results
+    type: collection
+    folder: content/practice-areas
+    label: Practice Areas
+    format: yaml+md
+    fields:
+      - name: title
+        label: Practice Area Title
+        type: string
+      - name: slug
+        label: URL Slug
+        type: string
+      - name: description
+        label: Description
+        type: text
+      - name: icon
+        label: Icon (SVG)
+        type: image
+        options:
+          media: vector_assets
+          extensions: [svg]
+      - name: featured_image
+        label: Featured Image
+        type: image
+        options:
+          media: general_images
+      - name: order
+        label: Display Order
+        type: number
+        options:
+          min: 1
+          step: 1
+      - name: featured
+        label: Featured Practice Area
+        type: boolean
+        default: false
+      - name: case_stats
+        label: Case Statistics
+        type: object
+        fields:
+          - name: cases_won
+            label: Cases Won
+            type: number
+            options:
+              min: 0
+          - name: total_recovered
+            label: Total Recovered ($)
+            type: number
+            options:
+              min: 0
+              step: 1000
+          - name: years_experience
+            label: Years of Experience
+            type: number
+            options:
+              min: 0
+              step: 1
+      - name: body
+        label: Detailed Information
+        type: rich-text
+        options:
+          media: general_images
+
   case_results:
-    path: content/case-results
-    name: Case Results
-    icon: emoji_events
-    schemas:
+    type: collection
+    folder: content/case-results
+    label: Case Results
+    format: json
+    fields:
+      - name: case_name
+        label: Case Name
+        type: string
+      - name: case_type
+        label: Case Type
+        type: reference
+        options:
+          collection: practice_areas
+      - name: settlement_amount
+        label: Settlement Amount ($)
+        type: number
+        options:
+          min: 0
+          step: 1000
+      - name: description
+        label: Case Description
+        type: text
+      - name: date_resolved
+        label: Date Resolved
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: featured
+        label: Featured Case
+        type: boolean
+        default: false
+      - name: case_documents
+        label: Case Documents
+        type: file
+        options:
+          media: documents
+          multiple: true
+
+  testimonials:
+    type: collection
+    folder: content/testimonials
+    label: Client Testimonials
+    format: json
+    fields:
+      - name: client_name
+        label: Client Name
+        type: string
+      - name: quote
+        label: Testimonial Quote
+        type: text
+        options:
+          maxlength: 500
+      - name: source
+        label: Testimonial Source
+        type: select
+        options:
+          values:
+            - value: google
+              label: Google Reviews
+            - value: yelp
+              label: Yelp
+            - value: direct
+              label: Direct Feedback
+      - name: rating
+        label: Rating
+        type: number
+        options:
+          min: 1
+          max: 5
+          step: 0.5
+      - name: verified
+        label: Verified Review
+        type: boolean
+        default: false
+      - name: published
+        label: Published
+        type: boolean
+        default: true
+      - name: google_review_id
+        label: Google Review ID
+        type: uuid
+        options:
+          editable: true
+
+  team:
+    type: collection
+    folder: content/team
+    label: Team Members
+    format: yaml+md
+    fields:
+      - name: name
+        label: Full Name
+        type: string
+      - name: title
+        label: Job Title
+        type: string
+      - name: email
+        label: Email
+        type: string
+      - name: phone
+        label: Phone
+        type: string
+      - name: specialties
+        label: Specialties
+        type: select
+        options:
+          multiple: true
+          values:
+            - Personal Injury
+            - Car Accidents
+            - Slip & Fall
+            - Product Liability
+            - Workers Compensation
+      - name: bio
+        label: Short Bio
+        type: text
+        options:
+          maxlength: 200
+      - name: photo
+        label: Profile Photo
+        type: image
+        options:
+          media: team_photos
+          extensions: [jpg, jpeg, png]
+      - name: education
+        label: Education
+        type: object
+        fields:
+          - name: degree
+            label: Degree
+            type: string
+          - name: school
+            label: School/University
+            type: string
+          - name: year_graduated
+            label: Year Graduated
+            type: number
+            options:
+              min: 1970
+              max: 2024
+      - name: credentials
+        label: Credentials & Certifications
+        type: file
+        options:
+          media: documents
+          multiple: true
+      - name: body
+        label: Full Bio
+        type: rich-text
+        options:
+          media: general_images
+
+components:
+  seo:
+    label: SEO
+    type: object
+    fields:
+      - name: seo_title
+        label: SEO Title
+        type: string
+        required: true
+      - name: seo_description
+        label: SEO Description
+        type: string
+        required: true
+      - name: og_image
+        label: OG Image
+        type: image
+        options:
+          media: general_images
+      - name: canonical_url
+        label: Canonical URL
+        type: string
+      - name: schema_markup
+        label: Schema
+        type: code
+        options:
+          language: json
+
+  hero_section:
+    label: Hero
+    type: object
+    fields:
+      - name: heading
+        label: Heading
+        type: string
+        required: true
+      - name: subheading
+        label: Subheading
+        type: text
+      - name: background_image
+        label: Background
+        type: image
+        options:
+          media: hero_images
+      - name: background_color
+        label: BG Color
+        type: string
+      - name: text_color
+        label: Text Color
+        type: select
+        options: [light, dark]
+      - name: height
+        label: Height
+        type: select
+        options: [small, medium, large]
+
+  button:
+    label: Button
+    type: object
+    fields:
+      - name: text
+        label: Text
+        type: string
+        required: true
+      - name: link
+        label: Link
+        type: string
+        required: true
+      - name: style
+        label: Style
+        type: select
+        options: [primary, secondary, outline, danger]
+      - name: open_new_window
+        label: New Window
+        type: boolean
+
+  social_links:
+    label: Social
+    type: object
+    fields:
+      - name: facebook
+        label: Facebook
+        type: string
+      - name: twitter
+        label: Twitter
+        type: string
+      - name: linkedin
+        label: LinkedIn
+        type: string
+      - name: instagram
+        label: Instagram
+        type: string
+      - name: youtube
+        label: YouTube
+        type: string
+
+  contact_info:
+    label: Contact
+    type: object
+    fields:
+      - name: phone
+        label: Phone
+        type: string
+        required: true
+      - name: email
+        label: Email
+        type: string
+      - name: address_line1
+        label: Address
+        type: string
+        required: true
+      - name: city
+        label: City
+        type: string
+      - name: state
+        label: State
+        type: select
+        options: [AL, AK, AZ, AR, CA, CO, CT, DE, FL, GA, HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY]
+      - name: zip_code
+        label: ZIP
+        type: string
+
+content:
+  - name: settings
+    label: Site Settings
+    type: file
+    path: content/settings/site.json
+    fields:
+      - name: site_title
+        label: Site Title
+        type: string
+        required: true
+      - name: site_description
+        label: Description
+        type: text
+      - name: logo
+        label: Logo
+        type: image
+        options:
+          media: general_images
+      - name: color_scheme
+        label: Colors
+        type: object
+        fields:
+          - name: primary_color
+            label: Primary
+            type: string
+          - name: secondary_color
+            label: Secondary
+            type: string
+      - name: footer
+        label: Footer
+        type: object
+        fields:
+          - name: contact_info
+            component: contact_info
+          - name: social_links
+            component: social_links
+
+  - name: homepage
+    label: Homepage
+    type: file
+    path: content/pages/home.json
+    fields:
+      - name: hero
+        label: Hero
+        component: hero_section
+      - name: sections
+        label: Sections
+        type: block
+        list: true
+        blocks:
+          - name: hero_cta
+            label: Hero with CTA
+            fields:
+              - name: heading
+                label: Heading
+                type: string
+              - name: image
+                label: Image
+                type: image
+                options:
+                  media: hero_images
+              - name: buttons
+                label: Buttons
+                type: object
+                list: true
+                component: button
+          - name: text_section
+            label: Text
+            fields:
+              - name: title
+                label: Title
+                type: string
+              - name: content
+                label: Content
+                type: rich-text
+                options:
+                  media: general_images
+      - name: seo
+        component: seo
+
+  - name: pages
+    label: Pages
+    type: collection
+    path: content/pages
+    format: yaml-frontmatter
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: slug
+        label: Slug
+        type: string
+        required: true
+      - name: body
+        label: Content
+        type: rich-text
+        options:
+          media: general_images
+        required: true
+      - name: seo
+        component: seo
+      - name: published
+        label: Published
+        type: boolean
+        default: true
+    view:
+      fields: [title, published]
+      sort: [title]
+      search: [title, body]
+
+  - name: blog
+    label: Blog Posts
+    type: collection
+    path: content/posts
+    format: yaml-frontmatter
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: slug
+        label: Slug
+        type: string
+        required: true
+      - name: date
+        label: Date
+        type: date
+        required: true
+      - name: featured_image
+        label: Image
+        type: image
+        options:
+          media: blog_images
+      - name: category
+        label: Category
+        type: select
+        options: [Personal Injury, Auto Accidents, Insurance Claims, Criminal Defense]
+      - name: tags
+        label: Tags
+        type: string
+        list:
+          min: 0
+          max: 10
+      - name: body
+        label: Content
+        type: rich-text
+        options:
+          media: general_images
+        required: true
+      - name: seo
+        component: seo
+    view:
+      fields: [title, date, category]
+      sort: [date]
       default:
-        path: schemas/case-result.md
-    _enabled_editors:
-      - data
+        sort: date
+        order: desc
 
-# Schema definitions
-_schema:
-  # Settings Schema
-  settings:
-    - name: company
-      label: Company Information
-      type: object
-      fields:
-        - name: name
-          label: Company Name
-          type: string
-          default: The Costello Law Group
-        - name: tagline
-          label: Tagline
-          type: string
-          default: Expert Legal Representation
-        - name: description
-          label: Description
-          type: textarea
-          default: The Costello Law Group delivers personalized legal solutions with proven results.
-    
-    - name: contact
-      label: Contact Information
-      type: object
-      fields:
-        - name: phone
-          label: Phone Number
-          type: string
-          default: (954) 591-8099
-        - name: email
-          label: Email Address
-          type: string
-          default: joshua@thecostellolawgroup.com
-        - name: address
-          label: Address
-          type: string
-          default: 5846 S Flamingo Rd. Ste. 520, Cooper City, FL 33330
-    
-    - name: social
-      label: Social Media
-      type: object
-      fields:
-        - name: facebook
-          label: Facebook URL
-          type: string
-        - name: twitter
-          label: Twitter URL
-          type: string
-        - name: linkedin
-          label: LinkedIn URL
-          type: string
-        - name: instagram
-          label: Instagram URL
-          type: string
-    
-    - name: theme
-      label: Theme Colors
-      type: object
-      fields:
-        - name: primary
-          label: Primary Color (Teal)
-          type: color
-          default: '#00A878'
-          comment: Main brand color used for buttons and accents
-        - name: secondary
-          label: Secondary Color (Navy)
-          type: color
-          default: '#0A1628'
-          comment: Used for hero backgrounds and dark sections
-        - name: accent
-          label: Accent Color (Blue)
-          type: color
-          default: '#0066B2'
-          comment: Used for links and secondary buttons
-  
-  # Page Schema
-  page:
-    - name: title
-      label: Page Title
-      type: string
-      required: true
-    
-    - name: slug
-      label: Page Slug
-      type: string
-      required: true
-      comment: URL path for this page (e.g., /about, /contact)
-    
-    - name: hero
-      label: Hero Section
-      type: object
-      fields:
-        - name: heading
-          label: Main Heading
-          type: string
-        - name: subheading
-          label: Subheading
-          type: textarea
-        - name: cta_primary
-          label: Primary Call-to-Action
-          type: object
-          fields:
-            - name: text
-              label: Button Text
-              type: string
-            - name: url
-              label: Button URL
-              type: string
-        - name: cta_secondary
-          label: Secondary Call-to-Action
-          type: object
-          fields:
-            - name: text
-              label: Button Text
-              type: string
-            - name: url
-              label: Button URL
-              type: string
-        - name: background_color
-          label: Background Color
-          type: color
-          default: '#0A1628'
-    
-    - name: content
-      label: Page Content
-      type: markdown
-    
-    - name: seo
-      label: SEO Settings
-      type: object
-      fields:
-        - name: title
-          label: SEO Title
-          type: string
-        - name: description
-          label: Meta Description
-          type: textarea
-        - name: keywords
-          label: Keywords
-          type: string
-  
-  # Blog Post Schema
-  post:
-    - name: title
-      label: Post Title
-      type: string
-      required: true
-    
-    - name: slug
-      label: URL Slug
-      type: string
-      required: true
-    
-    - name: date
-      label: Publication Date
-      type: date
-      required: true
-    
-    - name: author
-      label: Author
-      type: string
-      default: Joshua Costello, Esq.
-    
-    - name: excerpt
-      label: Excerpt
-      type: textarea
-      comment: Short summary shown in listings
-    
-    - name: featured_image
-      label: Featured Image
-      type: image
-      comment: Main image for the post
-    
-    - name: category
-      label: Category
-      type: select
-      options:
-        - Personal Injury
-        - Auto Accidents
-        - Insurance Claims
-        - Criminal Defense
-        - Legal News
-        - Case Studies
-    
-    - name: tags
-      label: Tags
-      type: array
-      comment: Keywords for the post
-    
-    - name: content
-      label: Post Content
-      type: markdown
-    
-    - name: seo
-      label: SEO Settings
-      type: object
-      fields:
-        - name: title
-          label: SEO Title
-          type: string
-        - name: description
-          label: Meta Description
-          type: textarea
-  
-  # Practice Area Schema
-  practice_area:
-    - name: title
-      label: Practice Area Title
-      type: string
-      required: true
-    
-    - name: slug
-      label: URL Slug
-      type: string
-      required: true
-    
-    - name: icon
-      label: Icon Name
-      type: select
-      options:
-        - Car
-        - Truck
-        - Bike
-        - Scale
-        - HomeIcon
-        - Dog
-        - FileText
-        - Gavel
-        - Shield
-        - Users
-      comment: Icon to display for this practice area
-    
-    - name: description
-      label: Short Description
-      type: textarea
-      comment: Brief description shown in cards
-    
-    - name: order
-      label: Display Order
-      type: number
-      default: 0
-      comment: Lower numbers appear first
-    
-    - name: featured
-      label: Featured
-      type: checkbox
-      default: false
-    
-    - name: color
-      label: Text Color
-      type: string
-      comment: Tailwind class like 'text-blue-600'
-    
-    - name: bg_color
-      label: Background Color
-      type: string
-      comment: Tailwind class like 'bg-blue-50'
-    
-    - name: content
-      label: Detailed Content
-      type: markdown
-    
-    - name: services_offered
-      label: Services Offered
-      type: array
-      comment: List of specific services
-    
-    - name: faq
-      label: Frequently Asked Questions
-      type: array
-      comment: Common questions and answers
-  
-  # Testimonial Schema
-  testimonial:
-    - name: client_name
-      label: Client Name
-      type: string
-      required: true
-    
-    - name: case_type
-      label: Case Type
-      type: string
-      required: true
-      comment: E.g., 'Personal Injury Client', 'Car Accident Client'
-    
-    - name: quote
-      label: Testimonial Quote
-      type: textarea
-      required: true
-    
-    - name: rating
-      label: Rating
-      type: number
-      default: 5
-      comment: Star rating (1-5)
-    
-    - name: featured
-      label: Featured
-      type: checkbox
-      default: false
-      comment: Display on homepage
-    
-    - name: date
-      label: Date
-      type: date
-      comment: When the testimonial was received
-  
-  # Case Result Schema
-  case_result:
-    - name: title
-      label: Case Title
-      type: string
-      required: true
-    
-    - name: case_type
-      label: Case Type
-      type: select
-      options:
-        - Car Accident
-        - Truck Accident
-        - Motorcycle Accident
-        - Slip and Fall
-        - Premises Liability
-        - Dog Bite
-        - Wrongful Death
-        - Insurance Claim
-        - Criminal Defense
-        - Other
-    
-    - name: settlement_amount
-      label: Settlement Amount
-      type: string
-      comment: E.g., '$500,000' or 'Confidential'
-    
-    - name: description
-      label: Case Description
-      type: textarea
-    
-    - name: outcome
-      label: Outcome
-      type: textarea
-    
-    - name: featured
-      label: Featured
-      type: checkbox
-      default: false
-    
-    - name: date
-      label: Settlement Date
-      type: date
+  - name: practice_areas
+    label: Practice Areas
+    type: collection
+    path: content/practice-areas
+    format: yaml-frontmatter
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: slug
+        label: Slug
+        type: string
+        required: true
+      - name: order
+        label: Order
+        type: number
+      - name: body
+        label: Content
+        type: rich-text
+        options:
+          media: general_images
+        required: true
+      - name: seo
+        component: seo
+    view:
+      fields: [title, order]
+      sort: [order]
 
-# Global configuration
-timezone: America/New_York
+  - name: testimonials
+    label: Testimonials
+    type: collection
+    path: content/testimonials
+    format: json
+    fields:
+      - name: client_name
+        label: Name
+        type: string
+        required: true
+      - name: quote
+        label: Quote
+        type: text
+        required: true
+      - name: rating
+        label: Rating
+        type: number
+        default: 5
+        options:
+          min: 1
+          max: 5
+      - name: featured
+        label: Featured
+        type: boolean
+    view:
+      fields: [client_name, rating, featured]
+      sort: [rating]
 
-# Editor configuration
-_editors:
+  - name: team
+    label: Team
+    type: collection
+    path: content/team
+    format: json
+    fields:
+      - name: name
+        label: Name
+        type: string
+        required: true
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: photo
+        label: Photo
+        type: image
+        options:
+          media: team_photos
+        required: true
+      - name: bio
+        label: Bio
+        type: rich-text
+        options:
+          media: general_images
+      - name: email
+        label: Email
+        type: string
+      - name: phone
+        label: Phone
+        type: string
+    view:
+      fields: [name, title]
+      sort: [name]
+
+settings:
   content:
-    preview:
-      text: Rich Text Editor
-      subtext: Edit content with formatting
-  visual:
-    preview:
-      text: Visual Editor
-      subtext: Edit content visually on the page
-  data:
-    preview:
-      text: Data Editor
-      subtext: Edit structured data
-
-# Source configuration
-source: .
-
-# Paths
-paths:
-  dam_uploads: public
-  dam_static: ''
-  static: public
-  uploads: public
-
-# Collections
-collections:
-  - path: content/pages
-    name: Pages
-    icon: description
-  - path: content/posts
-    name: Blog Posts
-    icon: article
-  - path: content/practice-areas
-    name: Practice Areas
-    icon: gavel
-  - path: content/testimonials
-    name: Testimonials
-    icon: format_quote
-  - path: content/case-results
-    name: Case Results
-    icon: emoji_events
-  - path: content/settings
-    name: Settings
-    icon: settings
-
-# Data configuration for content collections
-_inputs:
-  title:
-    type: text
-    comment: The title of the content
-  description:
-    type: textarea
-    comment: A short description
-  content:
-    type: markdown
-    comment: Main content area with rich text formatting
-  date:
-    type: datetime
-    timezone: America/New_York
-  color:
-    type: color
-  featured:
-    type: checkbox
-  rating:
-    type: number
-    min: 1
-    max: 5
-  image:
-    type: image
-  images:
-    type: array
-  tags:
-    type: multiselect
-    options:
-      values:
-        - Personal Injury
-        - Auto Accidents
-        - Insurance Claims
-        - Legal Tips
-        - Case Updates
-        - Community News
-
-# Brand colors from the website
-_brand:
-  primary: '#00A878'
-  secondary: '#0A1628'
-  accent: '#0066B2'
-
-# Navigation structure
-_structures:
-  navigation:
-    values:
-      - label: Nav Item
-        value:
-          text:
-          url:
-          items:
-
-# Site data
-_site:
-  name: The Costello Law Group
-  tagline: Expert Legal Representation
-  description: Personal injury, insurance claims, and criminal defense attorneys serving Broward County, Florida
-  url: https://thecostellolawgroup.com
-  
-  # Contact information
-  contact:
-    phone: (954) 591-8099
-    email: joshua@thecostellolawgroup.com
-    address: 5846 S Flamingo Rd. Ste. 520, Cooper City, FL 33330
-    
-  # Service area
-  service_area:
-    - Cooper City, FL
-    - Davie, FL
-    - Plantation, FL
-    - Pembroke Pines, FL
-    - Broward County, FL
-  
-  # Social media
-  social:
-    facebook: https://www.facebook.com/costellolawgroup
-    linkedin: https://www.linkedin.com/company/costello-law-group
-    twitter: https://twitter.com/costellolawgrp
-  
-  # Practice areas
-  practice_areas:
-    - Car Accidents
-    - Truck Accidents
-    - Motorcycle Accidents
-    - Slip & Fall
-    - Premises Liability
-    - Dog Bites
-    - Wrongful Death
-    - PIP Claims
-    - Criminal Defense
-    - Homeowners Insurance
-  
-  # Theme colors
-  colors:
-    primary: '#00A878'    # Teal - Main brand color
-    secondary: '#0A1628'  # Navy - Dark backgrounds
-    accent: '#0066B2'     # Blue - Links and secondary CTAs
-    white: '#FFFFFF'
-    gray_50: '#F9FAFB'
-    gray_100: '#F3F4F6'
-    gray_200: '#E5E7EB'
-    gray_700: '#374151'
-    gray_900: '#111827'
+    merge: false

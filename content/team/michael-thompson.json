@@ -1,0 +1,39 @@
+{
+  "name": "Michael Thompson",
+  "title": "Criminal Defense Attorney",
+  "slug": "michael-thompson",
+  "bio": "Michael Thompson brings aggressive representation and detailed legal strategy to criminal defense cases. With 10 years of experience in criminal law, he has successfully defended clients in felony and misdemeanor cases throughout Florida.",
+  "photo": "/images/team/michael-thompson.jpg",
+  "credentials": [
+    "Juris Doctor, Miami Law School",
+    "Florida Bar License #345678",
+    "Certified Criminal Trial Specialist"
+  ],
+  "bar_status": "Florida",
+  "education": [
+    {
+      "school": "Miami Law School",
+      "degree": "Juris Doctor",
+      "year": 2014
+    },
+    {
+      "school": "University of Miami",
+      "degree": "Bachelor of Science in Criminal Justice",
+      "year": 2011
+    }
+  ],
+  "experience_years": 10,
+  "specialties": [
+    "Criminal Defense",
+    "DUI/DWI",
+    "Drug Crimes",
+    "Felony Defense",
+    "Misdemeanor Defense"
+  ],
+  "social_links": {
+    "linkedin": "https://linkedin.com/in/michaelthompson",
+    "facebook": ""
+  },
+  "featured": false,
+  "display_order": 3
+}

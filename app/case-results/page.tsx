@@ -6,10 +6,7 @@ import Link from "next/link"
 import { DollarSign, Scale, TrendingUp } from "lucide-react"
 
 export default function CaseResultsPage() {
-  const results = [
-    {
-     
-  ]
+  const results = []
 
   const testimonials = [
     {

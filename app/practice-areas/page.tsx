@@ -43,7 +43,19 @@ export default function PracticeAreasPage() {
       results: " ",
     },
     {
-      
+      id: "motorcycle-accidents",
+      icon: Bike,
+      title: "Motorcycle Accidents",
+      description: "Motorcycle accidents often result in severe injuries. We fight for the compensation you deserve.",
+      details: [
+        "Motorcycle collisions",
+        "Severe injury claims",
+        "Road hazard accidents",
+        "Negligent driver liability",
+        "Defective motorcycle parts",
+        "Comprehensive damage recovery",
+      ],
+      results: "Experienced motorcycle accident advocacy",
     },
     {
       id: "rideshare-accidents",

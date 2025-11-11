@@ -1,23 +1,114 @@
 {
+  "site_title": "The Costello Law Group - Personal Injury & Criminal Defense Attorneys",
+  "site_description": "Expert legal representation in Broward County, Florida. Specializing in personal injury, auto accidents, insurance claims, and criminal defense.",
+  "site_url": "https://the-poop-build.vercel.app",
+  "logo": "/images/logo.png",
+  "logo_dark": "/images/logo-dark.png",
+  "favicon": "/images/favicon.ico",
+  "color_scheme": {
+    "primary_color": "#0066B2",
+    "secondary_color": "#00A878",
+    "accent_color": "#FF6B35",
+    "background_color": "#FFFFFF",
+    "text_color": "#000000",
+    "border_color": "#E0E0E0"
+  },
   "company": {
     "name": "The Costello Law Group",
     "tagline": "Expert Legal Representation",
-    "description": "The Costello Law Group delivers personalized legal solutions with proven results. Specializing in personal injury, insurance claims, and criminal defense across Cooper City, Davie, Plantation, and Pembroke Pines."
+    "description": "The Costello Law Group delivers personalized legal solutions with proven results. Specializing in personal injury, insurance claims, and criminal defense across Broward County, Florida."
   },
   "contact": {
     "phone": "(954) 591-8099",
-    "email": "joshuacostello2013@gmail.com",
-    "address": "Serving Broward County, Florida"
+    "email": "contact@costellolaw.com",
+    "address": "123 Legal Street",
+    "city": "Fort Lauderdale",
+    "state": "FL",
+    "zip": "33301",
+    "hours": "Monday - Friday: 9AM - 5PM"
   },
-  "social": {
+  "navigation": {
+    "items": [
+      {
+        "label": "Home",
+        "href": "/",
+        "submenu": []
+      },
+      {
+        "label": "Practice Areas",
+        "href": "/practice-areas",
+        "submenu": []
+      },
+      {
+        "label": "About",
+        "href": "/about",
+        "submenu": []
+      },
+      {
+        "label": "Blog",
+        "href": "/blog",
+        "submenu": []
+      },
+      {
+        "label": "Case Results",
+        "href": "/case-results",
+        "submenu": []
+      },
+      {
+        "label": "Contact",
+        "href": "/contact",
+        "submenu": []
+      }
+    ]
+  },
+  "footer": {
+    "company_name": "The Costello Law Group",
+    "footer_description": "Dedicated to fighting for justice and protecting the rights of individuals and families throughout Broward County.",
+    "copyright_text": "© 2024 The Costello Law Group. All rights reserved.",
+    "contact_info": {
+      "phone": "(954) 591-8099",
+      "email": "contact@costellolaw.com",
+      "address": "123 Legal Street",
+      "city": "Fort Lauderdale",
+      "state": "FL",
+      "zip": "33301",
+      "hours": "Monday - Friday: 9AM - 5PM"
+    },
+    "social_links": {
+      "facebook": "https://facebook.com/costellolawgroup",
+      "twitter": "https://twitter.com/costellolaw",
+      "linkedin": "https://linkedin.com/company/costello-law",
+      "instagram": "https://instagram.com/costellolaw",
+      "google_business": "https://www.google.com/maps/place/The+Costello+Law+Group",
+      "youtube": "https://youtube.com/@costellolaw"
+    },
+    "footer_links": [
+      {
+        "label": "Privacy Policy",
+        "url": "/privacy"
+      },
+      {
+        "label": "Terms of Service",
+        "url": "/terms"
+      }
+    ]
+  },
+  "social_links": {
     "facebook": "https://facebook.com/costellolawgroup",
-    "twitter": "",
-    "instagram": "",
-    "linkedin": "",
-    "youtube": ""
+    "twitter": "https://twitter.com/costellolaw",
+    "linkedin": "https://linkedin.com/company/costello-law",
+    "instagram": "https://instagram.com/costellolaw",
+    "google_business": "https://www.google.com/maps/place/The+Costello+Law+Group",
+    "youtube": "https://youtube.com/@costellolaw"
   },
-  "theme": {
-    "primary": "#00A878",
-    "secondary": "#0A1628"
+  "integrations": {
+    "google_analytics_id": "G-XXXXXXXXXX",
+    "google_my_business_id": "YOUR_GMB_ID",
+    "google_my_business_api_key": "",
+    "facebook_pixel_id": "",
+    "gtag_conversion_id": "",
+    "mailchimp_api_key": "",
+    "slack_webhook": "",
+    "zapier_webhook": ""
   }
 }

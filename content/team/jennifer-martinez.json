@@ -1,0 +1,40 @@
+{
+  "name": "Jennifer Martinez",
+  "title": "Senior Attorney - Personal Injury",
+  "slug": "jennifer-martinez",
+  "bio": "Jennifer Martinez specializes in complex personal injury cases with a focus on severe injuries and high-value settlements. With over 12 years of trial experience, she has helped countless clients obtain justice and fair compensation.",
+  "photo": "/images/team/jennifer-martinez.jpg",
+  "credentials": [
+    "Juris Doctor, Florida State University College of Law",
+    "Board Certified in Civil Trial Law",
+    "Florida Bar License #234567",
+    "Multi-State Bar Admission"
+  ],
+  "bar_status": "Multi-State",
+  "education": [
+    {
+      "school": "Florida State University College of Law",
+      "degree": "Juris Doctor",
+      "year": 2012
+    },
+    {
+      "school": "Florida State University",
+      "degree": "Bachelor of Arts in Psychology",
+      "year": 2009
+    }
+  ],
+  "experience_years": 12,
+  "specialties": [
+    "Personal Injury",
+    "Slip and Fall",
+    "Workplace Injuries",
+    "Medical Malpractice",
+    "Product Liability"
+  ],
+  "social_links": {
+    "linkedin": "https://linkedin.com/in/jennifermartinez",
+    "facebook": ""
+  },
+  "featured": true,
+  "display_order": 2
+}
