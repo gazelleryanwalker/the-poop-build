@@ -8,7 +8,23 @@ import { DollarSign, Scale, TrendingUp } from "lucide-react"
 export default function CaseResultsPage() {
   const results = [
     {
-     
+      id: 1,
+      amount: "$1.2M",
+      type: "Motorcycle Accident",
+      description: "Severe injuries sustained in motorcycle accident on Griffin Road in Cooper City",
+    },
+    {
+      id: 2,
+      amount: "$850K",
+      type: "Car Accident",
+      description: "Rear-end collision resulting in back and neck injuries in Davie, FL",
+    },
+    {
+      id: 3,
+      amount: "$425K",
+      type: "Slip and Fall",
+      description: "Premises liability claim for injuries at commercial property in Plantation",
+    },
   ]
 
   const testimonials = [

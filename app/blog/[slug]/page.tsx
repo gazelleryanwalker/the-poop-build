@@ -5,8 +5,7 @@ import Link from "next/link"
 import { Calendar, Clock, ArrowLeft, Phone } from "lucide-react"
 import Image from "next/image"
 import { notFound } from "next/navigation"
-import { getPostBySlug, getAllPosts } from "@/lib/tina-client"
-import { TinaMarkdown } from "tinacms/dist/rich-text"
+import { getPostBySlug, getAllPosts } from "@/lib/content"
 
 export const revalidate = 60 // Revalidate every 60 seconds
 export const dynamicParams = true // Allow dynamic params for posts not in generateStaticParams
@@ -14,24 +13,12 @@ export const dynamicParams = true // Allow dynamic params for posts not in gener
 export async function generateStaticParams() {
   try {
     const posts = await getAllPosts()
-    const tinaPaths = posts.map((post: any) => ({
-      slug: post._sys?.filename?.replace('.mdx', '') || post.slug,
+    return posts.map((post: any) => ({
+      slug: post.slug,
     }))
-    
-    // Add fallback slugs for content that exists in the content directory
-    const fallbackSlugs = [
-      { slug: 'understanding-personal-injury-claims' },
-      { slug: 'what-to-do-after-car-accident' },
-    ]
-    
-    return [...tinaPaths, ...fallbackSlugs]
   } catch (error) {
     console.error('Error generating static params:', error)
-    // Return fallback slugs if TinaCMS fails
-    return [
-      { slug: 'understanding-personal-injury-claims' },
-      { slug: 'what-to-do-after-car-accident' },
-    ]
+    return []
   }
 }
 
@@ -48,10 +35,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   if (!post) {
     notFound()
   }
-
-  // Calculate read time from body content (rough estimate: 200 words per minute)
-  const wordCount = post.body ? JSON.stringify(post.body).split(/\s+/).length : 1000
-  const readTime = Math.ceil(wordCount / 200)
 
   return (
     <div className="min-h-screen">
@@ -93,7 +76,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="h-5 w-5" />
-                <span>{readTime} min read</span>
+                <span>{post.readTime} min read</span>
               </div>
             </div>
           </div>
@@ -115,7 +98,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <article className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="prose prose-lg prose-slate max-w-none">
-            {post.body && <TinaMarkdown content={post.body} />}
+            <div dangerouslySetInnerHTML={{ __html: post.body || '' }} />
           </div>
 
           {/* Tags */}
