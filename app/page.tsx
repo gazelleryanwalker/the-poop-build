@@ -1,13 +1,12 @@
-import { getAllTestimonials, getAllPracticeAreas, getPageBySlug } from "@/lib/tina-client"
 import HomePageClient from "./page-client"
 
 export const revalidate = 60 // Revalidate every 60 seconds
 
 export default async function HomePage() {
-  // Fetch data from TinaCMS
-  const testimonials = await getAllTestimonials()
-  const practiceAreas = await getAllPracticeAreas()
-  const homePageData = await getPageBySlug("home")
+  // Use static data - Pages CMS will manage content files
+  const testimonials: any[] = []
+  const practiceAreas: any[] = []
+  const homePageData = null
 
   return <HomePageClient testimonials={testimonials} practiceAreas={practiceAreas} homePageData={homePageData} />
 }
