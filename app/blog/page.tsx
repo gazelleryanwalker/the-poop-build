@@ -4,14 +4,14 @@ import { Card, CardContent } from "@/components/ui/card"
 import Link from "next/link"
 import { Calendar, Clock, ArrowRight } from "lucide-react"
 import Image from "next/image"
-import { getAllPosts } from "@/lib/tina-client"
+import { getAllPosts } from "@/lib/content"
 
 export const revalidate = 60 // Revalidate every 60 seconds
 
 export default async function BlogPage() {
   const posts = await getAllPosts()
 
-  // Fallback blog posts if TinaCMS has no content yet
+  // Fallback blog posts if content directory has no posts yet
   const fallbackPosts = [
     {
       _id: "1",
@@ -59,7 +59,7 @@ export default async function BlogPage() {
     },
   ]
 
-  // Use TinaCMS posts if available, otherwise use fallback
+  // Use content posts if available, otherwise use fallback
   const displayPosts = posts.length > 0 ? posts : fallbackPosts
 
   return (
@@ -82,8 +82,7 @@ export default async function BlogPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8">
             {displayPosts.map((post: any) => {
-              // Handle both TinaCMS and fallback post formats
-              const postSlug = post.slug || post._sys?.filename?.replace('.mdx', '')
+              const postSlug = post.slug
               const postTitle = post.title
               const postExcerpt = post.excerpt
               const postImage = post.featured_image || "/placeholder.svg?height=400&width=600"

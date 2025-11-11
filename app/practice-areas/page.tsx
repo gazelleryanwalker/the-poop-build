@@ -43,7 +43,19 @@ export default function PracticeAreasPage() {
       results: " ",
     },
     {
-      
+      id: "motorcycle-accidents",
+      icon: Bike,
+      title: "Motorcycle Accidents",
+      description: "Motorcyclists face unique risks on the road. We understand the complexities of motorcycle accident cases.",
+      details: [
+        "Serious road rash injuries",
+        "Broken bones and fractures",
+        "Head and brain injuries",
+        "Spinal cord damage",
+        "Lane-splitting accidents",
+        "Left-turn collisions",
+      ],
+      results: "Dedicated motorcycle accident representation",
     },
     {
       id: "rideshare-accidents",
