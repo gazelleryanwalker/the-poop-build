@@ -182,7 +182,7 @@ export default function HomePageClient({ testimonials, practiceAreas, homePageDa
     },
   ]
 
-  // Use TinaCMS data if available, otherwise use defaults
+  // Use content from Pages CMS if available, otherwise use defaults
   const displayPracticeAreas = practiceAreas && practiceAreas.length > 0 ? practiceAreas : defaultPracticeAreas
   const displayTestimonials = testimonials && testimonials.length > 0 ? testimonials : defaultTestimonials
 
