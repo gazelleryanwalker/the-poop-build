@@ -204,15 +204,7 @@ export default function HomePageClient({ testimonials, practiceAreas, homePageDa
         className="relative py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-[#0A1628] overflow-hidden min-h-[75vh] sm:min-h-[80vh] lg:min-h-[85vh] flex items-center"
       >
         {/* Subtle background pattern */}
-        <div className="absolute inset-0 opacity-[0.03]">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fillRule='evenodd'%3E%3Cg fill='%23ffffff' fillOpacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-              backgroundSize: "60px 60px",
-            }}
-          />
-        </div>
+        <div className="absolute inset-0 opacity-[0.03] bg-pattern" />
 
         {/* Subtle gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#0A1628] via-[#0D1D35] to-[#0A1628]" />
@@ -523,14 +515,7 @@ export default function HomePageClient({ testimonials, practiceAreas, homePageDa
 
       {/* CTA Section */}
       <section className="relative py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#0066B2] via-[#0A1628] to-[#0066B2] overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fillRule='evenodd'%3E%3Cg fill='%23ffffff' fillOpacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }}
-          />
-        </div>
+        <div className="absolute inset-0 opacity-5 bg-pattern" />
 
         <div className="relative max-w-4xl mx-auto text-center">
           <h2 className="font-serif text-4xl lg:text-5xl font-bold mb-6 text-white">Ready to Get Started?</h2>

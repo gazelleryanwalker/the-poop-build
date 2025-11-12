@@ -153,7 +153,7 @@ export default function RootLayout({
             src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
             height="0"
             width="0"
-            style={{ display: "none", visibility: "hidden" }}
+            className="hidden"
           />
         </noscript>
         <ScrollToTop />
