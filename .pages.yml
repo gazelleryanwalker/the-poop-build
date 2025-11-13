@@ -313,7 +313,6 @@ content:
         component: seo
     view:
       fields: [title, date, category]
-      sort: [date]
       default:
         sort: date
         order: desc
