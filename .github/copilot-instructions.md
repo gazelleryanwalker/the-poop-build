@@ -14,11 +14,23 @@ This is a **Next.js 15 law firm website** with **Pages CMS** (headless CMS integ
 
 ### Build & Development
 ```bash
+# Package Manager Note: Project uses pnpm, but npm with --legacy-peer-deps works too
+# This is due to React 19 peer dependency conflicts with some packages
+
 # Local development (no CMS server needed)
 pnpm dev  # Runs: next dev
+# OR
+npm run dev
 
 # Build for production
 pnpm build  # Runs: next build (generates static pages from content files)
+# OR
+npm run build --legacy-peer-deps
+
+# Install dependencies
+pnpm install
+# OR
+npm install --legacy-peer-deps
 ```
 
 ### Content Management Pattern
@@ -156,15 +168,19 @@ CLOUDINARY_API_SECRET=
 ```bash
 # Development (no CMS server needed)
 pnpm dev          # Start Next.js dev server
+npm run dev       # Alternative with npm
 
 # Production build
 pnpm build        # Generate static site
+npm run build     # May require --legacy-peer-deps flag
 
 # Run locally built site
 pnpm start        # Start production server
+npm start         # Alternative with npm
 
 # Type checking
-pnpm lint         # ESLint check
+pnpm lint         # ESLint check (requires ESLint setup)
+npm run lint      # Alternative with npm
 ```
 
 ## Key Files
@@ -194,3 +210,50 @@ pnpm lint         # ESLint check
 - Vercel handles automatic deployment on commits
 
 When modifying this codebase, remember that content is managed via GitHub commits to the `content/` directory, and the filesystem is the single source of truth.
+
+## Security & Best Practices
+
+### Handling Secrets
+- **NEVER** commit API keys or secrets to the repository
+- Use `.env.local` for local development (already in `.gitignore`)
+- Environment variables should be set in Vercel dashboard for production
+- Check `.env.example` for required variables
+
+### Code Quality
+- Run `npm run lint` before committing (note: requires ESLint setup)
+- Run `npm run build` to verify no build errors
+- Test all changes locally with `npm run dev` before pushing
+- Review changes with `git diff` to ensure only intended files are modified
+
+## Common Pitfalls to Avoid
+
+- **DON'T** modify content files outside the `content/` directory structure
+- **DON'T** add dependencies without checking compatibility with React 19 and Next.js 15
+- **DON'T** remove or modify working server actions without thorough testing
+- **DON'T** change routing structure without verifying all internal links
+- **DON'T** modify `lib/pages-client.ts` without understanding downstream impacts
+- **DON'T** commit `node_modules/` or `.next/` build artifacts
+
+## Validation & Testing Guidelines
+
+### Before Submitting Changes
+1. **Verify Build**: Run `npm run build` (use `--legacy-peer-deps` if needed)
+2. **Local Testing**: Run `npm run dev` and manually test affected pages
+3. **Content Integrity**: If modifying content files, verify frontmatter syntax
+4. **Link Verification**: Check all modified routes load correctly
+5. **Visual Inspection**: Review UI changes in browser at multiple breakpoints
+
+### Acceptance Criteria for Changes
+- All existing functionality continues to work
+- New features include appropriate error handling
+- No console errors in browser or build output
+- Changes follow existing code patterns and conventions
+- Documentation updated if public APIs or workflows change
+
+## Dependency Management
+
+When adding dependencies:
+- Use `npm install --legacy-peer-deps` due to React 19 compatibility
+- Check package compatibility with Next.js 15 and React 19
+- Prefer established packages from the shadcn/ui ecosystem when possible
+- Update `package.json` with exact versions for critical dependencies
