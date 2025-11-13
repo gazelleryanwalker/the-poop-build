@@ -1,23 +1,9 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import { Playfair_Display } from "next/font/google"
 import "./globals.css"
 import { Suspense } from "react"
 import Script from "next/script"
 import { ScrollToTop } from "@/components/scroll-to-top"
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-})
-
-const playfairDisplay = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
-})
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://thecostellolawgroup.com'),
@@ -147,7 +133,7 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className={`font-sans ${inter.variable} ${playfairDisplay.variable}`}>
+      <body className="font-sans">
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
