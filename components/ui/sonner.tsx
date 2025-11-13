@@ -19,6 +19,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
         } as React.CSSProperties
       }
       {...props}
+      {...{ soundEnabled: false } as any}
     />
   )
 }
